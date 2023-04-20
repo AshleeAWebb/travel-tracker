@@ -23,46 +23,34 @@
 
       <!-- Travel columns -->
       <section class="travel-columns">
-      <label for="travel-dropdown">Select Travel:</label>
-      <select class="travel-dropdown" id="travel-dropdown">
-        <option value="pending" selected>Pending Travel</option>
-        <option value="upcoming">Upcoming Travel</option>
-        <option value="past">Past Travel</option>
-      </select>
+        <label for="travel-dropdown">Select Travel:</label>
+        <select class="travel-dropdown" id="travel-dropdown">
+          <option value="pending" selected>Pending Travel</option>
+          <option value="upcoming">Upcoming Travel</option>
+          <option value="past">Past Travel</option>
+        </select>
 
-      <div class="travel-box" id="pending-travel">
-        <h3>Pending Travel</h3>
-        <ul>
-          <li>Trip 1</li>
-          <li>Trip 2</li>
-          <li>Trip 3</li>
-        </ul>
-      </div>
+        <div class="travel-box" id="pending-travel">
+          <h3>Pending Travel</h3>
+          <div></div>
+        </div>
 
-      <div class="travel-box" id="upcoming-travel" style="display:none;">
-        <h3>Upcoming Travel</h3>
-        <ul>
-          <li>Trip 4</li>
-          <li>Trip 5</li>
-          <li>Trip 6</li>
-        </ul>
-      </div>
+        <div class="travel-box" id="upcoming-travel" style="display:none;">
+          <h3>Upcoming Travel</h3>
+          <div></div>
+        </div>
 
-      <div class="travel-box" id="past-travel" style="display:none;">
-        <h3>Past Travel</h3>
-        <ul>
-          <li>Trip 7</li>
-          <li>Trip 8</li>
-          <li>Trip 9</li>
-        </ul>
-      </div>
-    </section>
-      <!-- Cost Dounut Chart -->
-      <section>
-        <h2>Total Travel Cost</h2>
-        <div class="chart"></div>
+        <div class="travel-box" id="past-travel" style="display:none;">
+          <h3>Past Travel</h3>
+          <div></div>
+        </div>
       </section>
 
+      <!-- Cost Dounut Chart -->
+      <section>
+        <h2>Total Amount Spent This Year (including 10% travel agent fee)</h2>
+        <p id="total-spent"></p>
+      </section>
 
       <!-- Book Trip -->
       <section class="book-trip">
@@ -82,25 +70,6 @@
       </section>
     </section>
   </main>
-
-  <!-- Login Page with picture -->
-  <!-- <section>
-      <div class="wrapper">
-        <div class="background-image">
-          <img src="./images/travel-tracker-login.jpg" alt="building with pink haze sunset">
-        </div>
-        <div id="login-container" class="login-container">
-          <h1>Login</h1>
-          <form id="login-form">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit">Login</button>
-          </form>
-        </div>
-      </div>
-    </section> -->
   <script src="bundle.js"></script>
 </body>
 
