@@ -1,13 +1,24 @@
+// Import data
+import { fetchAllData } from './apiCalls';
+import { fetchSingleTraveler } from '.apiCalls';
+import { posttripsData } from './apiCalls';
+
+// Import style and img
 import './css/styles.css';
 import './images/travel-tracker-login.jpg';
 
+// Import classes
+import Traveler from '../src/Traveler';
+import Trip from '../src/Trip';
+import Destination from '../src/Destination';
+
 const dropdown = document.querySelector('#travel-dropdown'),
-      pendingTravel = document.querySelector('#pending-travel'),
-      upcomingTravel = document.querySelector('#upcoming-travel'),
-      pastTravel = document.querySelector('#past-travel'),
-      openModalBtn = document.querySelector('#open-modal-btn'),
-      closeModalBtn = document.querySelector('.close'),
-      modal = document.querySelector('#modal');
+  pendingTravel = document.querySelector('#pending-travel'),
+  upcomingTravel = document.querySelector('#upcoming-travel'),
+  pastTravel = document.querySelector('#past-travel'),
+  openModalBtn = document.querySelector('#open-modal-btn'),
+  closeModalBtn = document.querySelector('.close'),
+  modal = document.querySelector('#modal');
 
 if (dropdown.value === 'pending') {
   pendingTravel.style.display = 'block';
@@ -17,7 +28,7 @@ if (dropdown.value === 'pending') {
   pastTravel.style.display = 'block';
 }
 
-dropdown.addEventListener('change', function() {
+dropdown.addEventListener('change', function () {
   if (dropdown.value === 'pending') {
     pendingTravel.style.display = 'block';
     upcomingTravel.style.display = 'none';
@@ -33,19 +44,18 @@ dropdown.addEventListener('change', function() {
   }
 });
 
-openModalBtn.addEventListener('click', function() {
+// Event Listeners
+
+openModalBtn.addEventListener('click', function () {
   modal.style.display = 'block';
 });
 
-closeModalBtn.addEventListener('click', function() {
+closeModalBtn.addEventListener('click', function () {
   modal.style.display = 'none';
 });
 
-modal.addEventListener('click', function(event) {
+modal.addEventListener('click', function (event) {
   if (event.target === modal) {
     modal.style.display = 'none';
   }
 });
-
-
-
