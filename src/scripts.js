@@ -1,7 +1,5 @@
 // Import data
-import { fetchAllData } from './apiCalls';
-import { fetchSingleTraveler } from '.apiCalls';
-import { posttripsData } from './apiCalls';
+import { fetchAllData, fetchSingleTraveler, posttripsData } from './apiCalls';
 
 // Import style and img
 import './css/styles.css';
