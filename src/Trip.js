@@ -1,4 +1,5 @@
 import Destination from "./Destination";
+import { tripData } from "./data/trip-data";
 
 class Trip {
   constructor(tripData) {
