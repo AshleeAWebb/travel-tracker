@@ -1,3 +1,4 @@
+import { travelerData } from "./data/traveler-data";
 class Traveler {
   constructor(travelerData) {
     this.id = travelerData.id;
