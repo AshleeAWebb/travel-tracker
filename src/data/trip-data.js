@@ -65,7 +65,7 @@ let tripData = [
     "suggestedActivities": []
   }, {
     "id": 8,
-    "userID": 36,
+    "userID": 1,
     "destinationID": 39,
     "travelers": 6,
     "date": "2022/02/07",

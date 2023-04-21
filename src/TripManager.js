@@ -1,9 +1,11 @@
 import Trip from './Trip';
 import { tripData } from './data/trip-data';
+import DestinationManager from './DestinationManager';
 
 class TripManager {
-  constructor() {
+  constructor(destinationManager) {
     this.trips = [];
+    this.destinationManager = destinationManager;
     this.loadTripInfo(tripData);
   }
 
@@ -11,26 +13,18 @@ class TripManager {
     this.trips = tripData.map((tripInfo) => new Trip(tripInfo));
   }
 
-  costPerTrip(trip, destination) {
-    const totalLodgingCost = destination.lodgingCost * trip.duration * trip.travelers;
-    const totalFlightCost = destination.flightCost * trip.travelers;
-    return Math.round((totalLodgingCost + totalFlightCost) * 1.1);
-  }
-
   tripsByTraveler(traveler) {
-    return this.trips.filter((trip) => trip.id === traveler.id);
+    return this.trips.filter(trip => trip.userID === traveler.id);
   }
 
-  yearlyCost(destination, traveler, year) {
-    const travelerTrips = this.tripsByTraveler(traveler);
-    const tripsByYear = travelerTrips.filter(trip => trip.date.includes(year) && trip.status === "approved");
-    const totalCostOfTripsAnnually = tripsByYear.reduce((num, trip) => {
-      num += this.costPerTrip(trip, destination);
-      return num;
-    }, 0);
-    return Math.round(totalCostOfTripsAnnually);
+  yearlyCost(destinationManager, traveler) {
+    const today = new Date();
+    const oneYearAgo = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+    const trips = this.tripsByTraveler(traveler).filter(trip => new Date(trip.date) >= oneYearAgo);
+    const totalCost = trips.reduce((acc, trip) => acc + trip.costPerTrip(destinationManager.getDestinationById(trip.destinationID)), 0);
+    return Math.round(totalCost);
   }
-
 }
+
 
 export default TripManager;
