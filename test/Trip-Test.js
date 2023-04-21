@@ -4,6 +4,7 @@ import { tripData } from '../src/data/trip-data';
 import { destinationData } from '../src/data/destination-data';
 import { travelerData } from '../src/data/traveler-data'
 import Trip from '../src/Trip';
+import TripManager from '../src/TripManager';
 import Traveler from '../src/Traveler';
 import Destination from '../src/Destination';
 
@@ -16,7 +17,6 @@ describe('Trip', function() {
     destination = new Destination(destinationData[0]);
     trip = new Trip(tripData[0]);
     traveler = new Traveler(travelerData[0]);
-    trip.tripDataLoad(tripData)
   });
 
   it("should be a function", function () {
@@ -37,13 +37,35 @@ describe('Trip', function() {
     expect(trip.status).to.equal('approved');
     expect(trip.suggestedActivities).to.deep.equal([]);
   });
+});
 
-  it("should calculate the total cost of a trip", function () {
-    expect(trip.costPerTrip(destination)).to.equal();
+  describe('TripManager', function() {
+    let destination;
+    let tripManager; 
+    let traveler;
+
+  beforeEach(() => {
+    destination = new Destination(destinationData[0]);
+    tripManager = new TripManager;
+    traveler = new Traveler(travelerData[0]);
+    tripManager.loadTripInfo(tripData);
   });
 
+  it("should be a function", function () {
+    expect(TripManager).to.be.a("function");
+  });
+
+  it("should be an instances of trip", function () {
+    expect(tripManager).to.be.an.instanceof(TripManager)
+  });
+
+  // it("should calculate the total cost of a trip", function () {
+  //   const trip = tripManager.trips[0];
+  //   expect(tripManager.costPerTrip(trip, destination)).to.equal(0);
+  // });
+
   it("should find trips by traveler ID", function () {
-    expect(trip.tripsByTraveler(traveler)).to.deep.equal([
+    expect(tripManager.tripsByTraveler(traveler)).to.deep.equal([
          {
           "id": 1,
           "userID": 44,
@@ -57,8 +79,10 @@ describe('Trip', function() {
       ]);
   });
 
-  it("should calculate the total cost of annual trips for a user", function () {
-    expect(trip.yearlyCost(destination, traveler)).to.equal();
-  });
+  // it("should calculate the total cost of annual trips for a user", function () {
+  //   const year = '2022';
+  //   const expectedAnnualCost = 0; 
+  //   expect(tripManager.yearlyCost(destination, traveler, year)).to.equal(expectedAnnualCost);
+  // });
 
 })
