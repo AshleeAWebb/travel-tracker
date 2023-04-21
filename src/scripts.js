@@ -1,5 +1,5 @@
 // Import data
-import { fetchAllData, fetchSingleTraveler, posttripsData } from './apiCalls';
+import { fetchAllData } from './apiCalls';
 
 // Import style and img
 import './css/styles.css';
@@ -17,6 +17,8 @@ const dropdown = document.querySelector('#travel-dropdown'),
   openModalBtn = document.querySelector('#open-modal-btn'),
   closeModalBtn = document.querySelector('.close'),
   modal = document.querySelector('#modal');
+
+
 
 if (dropdown.value === 'pending') {
   pendingTravel.style.display = 'block';
@@ -42,6 +44,8 @@ dropdown.addEventListener('change', function () {
   }
 });
 
+
+
 // Event Listeners
 
 openModalBtn.addEventListener('click', function () {
@@ -57,3 +61,39 @@ modal.addEventListener('click', function (event) {
     modal.style.display = 'none';
   }
 });
+
+let traveler;
+let trips;
+let tripData;
+let destinations;
+let destinationData;
+
+function getFetch() {
+  fetchAllData()
+  .then(data => {
+    traveler = new Traveler(data[0]);
+    tripData = data[1].trips;
+    trips = new Trip(tripData)
+    destinationData = data[2].destinations;
+    destinations = new Destination(destinationData)
+    viewTravelerDashboard()
+  })
+}
+
+function viewTravelerDashboard() {
+  traveler.findTravelerTrips(tripData)
+  console.log(traveler)
+}
+
+// getFetch()
+// function show(element) {
+//   element.classList.remove('hidden');
+// };
+
+// function hide(element) {
+//   element.classList.add('hidden');
+// };
+
+window.addEventListener('load', () => {
+  getFetch()
+})
