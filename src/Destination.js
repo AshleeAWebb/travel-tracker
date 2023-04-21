@@ -9,7 +9,6 @@ class Destination {
       url: destinationData.image,
       alt: destinationData.alt
    }
-
  }
 
 }

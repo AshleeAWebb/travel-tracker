@@ -5,12 +5,11 @@ class Traveler {
     this.travelerType = travelerData.travelerType;
     this.travelers = [];
   }
+  
+  loadTravelerInfo(travelerData) {
+    this.travelers = travelerData.map((travelerInfo) => new Traveler(travelerInfo));
+  }
+  
 }
-
-function loadTravelerInfo(travelerData) {
-  this.travelers = travelerData.map((travelerInfo) => new Traveler(travelerInfo));
-}
-
-const travelers = [];
 
 export default Traveler;
