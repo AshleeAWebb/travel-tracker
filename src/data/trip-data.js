@@ -1,4 +1,4 @@
-let testTripData = [
+let tripData = [
   {
     "id": 1,
     "userID": 44,
@@ -74,4 +74,4 @@ let testTripData = [
     "suggestedActivities": []
   }
 ]
-export { testTripData }
+export { tripData }

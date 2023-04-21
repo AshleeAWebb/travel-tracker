@@ -1,6 +1,3 @@
-import Destination from "./Destination";
-import { tripData } from "./data/trip-data";
-
 class Trip {
   constructor(tripData) {
     this.id = tripData.id;
@@ -11,7 +8,7 @@ class Trip {
     this.duration = tripData.duration;
     this.status = tripData.status;
     this.suggestedActivities = tripData.suggestedActivities;
-  };
+  }
 }
 
 export default Trip;
