@@ -59,10 +59,10 @@ describe('Trip', function() {
     expect(tripManager).to.be.an.instanceof(TripManager)
   });
 
-  // it("should calculate the total cost of a trip", function () {
-  //   const trip = tripManager.trips[0];
-  //   expect(tripManager.costPerTrip(trip, destination)).to.equal(0);
-  // });
+  it("should calculate the total cost of a trip", function () {
+    const trip = tripManager.trips[0];
+    expect(tripManager.costPerTrip(trip, destination)).to.equal(0);
+  });
 
   it("should find trips by traveler ID", function () {
     expect(tripManager.tripsByTraveler(traveler)).to.deep.equal([
@@ -79,10 +79,10 @@ describe('Trip', function() {
       ]);
   });
 
-  // it("should calculate the total cost of annual trips for a user", function () {
-  //   const year = '2022';
-  //   const expectedAnnualCost = 0; 
-  //   expect(tripManager.yearlyCost(destination, traveler, year)).to.equal(expectedAnnualCost);
-  // });
+  it("should calculate the total cost of annual trips for a user", function () {
+    const year = '2022';
+    const expectedAnnualCost = 0; 
+    expect(tripManager.yearlyCost(destination, traveler, year)).to.equal(expectedAnnualCost);
+  });
 
 })
