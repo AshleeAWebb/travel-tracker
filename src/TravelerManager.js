@@ -1,5 +1,4 @@
-import Traveler from './Traveler';
-
+import Traveler from '../src/Traveler.js';
 class TravelManager {
   constructor() {
     this.travelers = [];

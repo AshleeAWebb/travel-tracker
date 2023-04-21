@@ -28,11 +28,11 @@ describe('Destination', function() {
   });
 
   it('should have a lodging cost', function () {
-    expect(destination.estimatedLodgingCostPerDay).to.equal(70);
+    expect(destination.estimatedLodging).to.equal(70);
   });
 
   it('should have a flight cost', function () {
-    expect(destination.estimatedFlightCostPerPerson).to.equal(400);
+    expect(destination.estimatedFlight).to.equal(400);
   });
 
   it('should have an image', function () {
@@ -49,6 +49,7 @@ describe('DestinationManager', function() {
 
   beforeEach(function() {
     destinationManager = new DestinationManager();
+    destinationManager.loadDestinations(destinationData)
   });
 
   it("should be a function", function () {
@@ -64,19 +65,18 @@ describe('DestinationManager', function() {
   });
 
   it('should find a destination by the ID', function() {
-    const destObject = destinationManager.findDestObject(1);
-    expect(destObject).to.deep.equal({
+    expect(destinationManager.loadDestinationInfo(1)).to.deep.equal({
       "id": 1,
       "destination": "Lima, Peru",
-      "estimatedLodgingCostPerDay": 70,
-      "estimatedFlightCostPerPerson": 400,
+      "estimatedLodging": 70,
+      "estimatedFlight": 400,
       "image": "https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
       "alt": "overview of city buildings with a clear sky",
     });
   });
 
   it('should find a destination ID by name', function() {
-    expect(destinationManager.findDestByName("Stockholm, Sweden")).to.equal(2);
+    expect(destinationManager.findDestinationByName("Stockholm, Sweden")).to.equal(2);
   });
 
   it('should calculate the flight cost of a trip', function() {

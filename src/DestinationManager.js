@@ -1,26 +1,29 @@
 import Destination from '../src/Destination';
-import { destinationData } from './data/destination-data';
 
 class DestinationManager {
-  constructor() {
-    this.allDestinations = destinationData.map((destinationInfo) => new Destination(destinationInfo));
+  constructor(destinationData) {
+    this.allDestinations = []
   }
 
-  findDestObject(destinationID) {
+  loadDestinations(destinationData) {
+    this.allDestinations = destinationData.map((destinationInfo) => new Destination(destinationInfo));
+  }
+  
+  loadDestinationInfo(destinationID) {
     return this.allDestinations.find(destination => destination.id === destinationID);
   }
 
   findFlightCost(destinationID) {
-    const destination = this.findDestObject(destinationID);
-    return destination.estimatedFlightCostPerPerson;
+    const destination = this.loadDestinationInfo(destinationID);
+    return destination.estimatedFlight;
   }
 
   findLodgingCost(destinationID) {
-    const destination = this.findDestObject(destinationID);
-    return destination.estimatedLodgingCostPerDay;
+    const destination = this.loadDestinationInfo(destinationID);
+    return destination.estimatedLodging;
   }
 
-  findDestByName(name) {
+  findDestinationByName(name) {
     return this.allDestinations.find(destination => destination.destination === name).id;
   }
 }

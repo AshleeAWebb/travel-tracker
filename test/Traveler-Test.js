@@ -3,23 +3,23 @@ import { travelerData } from '../src/data/traveler-data';
 import Traveler from '../src/Traveler';
 import TravelManager from '../src/TravelerManager';
 
-const assert = chai.assert;
+const expect = chai.expect;
 
 describe('Traveler', () => {
   const traveler = new Traveler(travelerData[0]);
 
   it('should be a function', () => {
-    assert.isFunction(Traveler);
+    expect(Traveler).to.be.a('function');
   });
 
   it('should be an instance of Traveler', () => {
-    assert.instanceOf(traveler, Traveler);
+    expect(traveler).to.be.an.instanceOf(Traveler);
   });
 
   it('should store the traveler data', () => {
-    assert.strictEqual(traveler.id, 1);
-    assert.strictEqual(traveler.name, 'Ham Leadbeater');
-    assert.strictEqual(traveler.travelerType, 'relaxer');
+    expect(traveler.id).to.equal(1);
+    expect(traveler.name).to.equal('Ham Leadbeater');
+    expect(traveler.travelerType).to.equal('relaxer');
   });
 });
 
@@ -32,36 +32,36 @@ describe('TravelManager', () => {
 
   describe('loadTravelerInfo', () => {
     it('should create Traveler instances from travelData', () => {
-      assert.lengthOf(travelManager.travelers, 8);
-      assert.strictEqual(travelManager.travelers[0].name, 'Ham Leadbeater');
-      assert.strictEqual(travelManager.travelers[1].id, 2);
+      expect(travelManager.travelers).to.have.lengthOf(8);
+      expect(travelManager.travelers[0].name).to.equal('Ham Leadbeater');
+      expect(travelManager.travelers[1].id).to.equal(2);
     });
   });
 
   describe('getTravelerById', () => {
     it('should return the correct traveler by ID', () => {
       const traveler = travelManager.getTravelerById(3);
-      assert.strictEqual(traveler.name, 'Sibby Dawidowitsch');
-      assert.strictEqual(traveler.travelerType, 'shopper');
+      expect(traveler.name).to.equal('Sibby Dawidowitsch');
+      expect(traveler.travelerType).to.equal('shopper');
     });
 
     it('should return undefined if no traveler is found', () => {
       const traveler = travelManager.getTravelerById(9);
-      assert.isUndefined(traveler);
+      expect(traveler).to.be.undefined;
     });
   });
 
   describe('getTravelersByType', () => {
     it('should return an array of travelers with the given type', () => {
       const shoppers = travelManager.getTravelersByType('shopper');
-      assert.lengthOf(shoppers, 2);
-      assert.strictEqual(shoppers[0].name, 'Sibby Dawidowitsch');
-      assert.strictEqual(shoppers[1].name, 'Laverna Flawith');
+      expect(shoppers).to.have.lengthOf(2);
+      expect(shoppers[0].name).to.equal('Sibby Dawidowitsch');
+      expect(shoppers[1].name).to.equal('Laverna Flawith');
     });
 
     it('should return an empty array if no travelers are found', () => {
       const adventurers = travelManager.getTravelersByType('adventurer');
-      assert.isEmpty(adventurers);
+      expect(adventurers).to.be.an('array').that.is.empty;
     });
   });
 });

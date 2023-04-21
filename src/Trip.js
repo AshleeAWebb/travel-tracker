@@ -1,3 +1,4 @@
+import Destination from "./Destination";
 class Trip {
   constructor(tripData) {
     this.id = tripData.id;
@@ -8,6 +9,15 @@ class Trip {
     this.duration = tripData.duration;
     this.status = tripData.status;
     this.suggestedActivities = tripData.suggestedActivities;
+  }
+
+  costPerTrip(destination) {
+    if (!destination || !destination.estimatedLodging || !destination.estimatedFlight) {
+      return 0;
+    }
+    const totalLodgingCost = destination.estimatedLodging * this.duration * this.travelers;
+    const totalFlightCost = destination.estimatedFlight * this.travelers;
+    return Math.round((totalLodgingCost + totalFlightCost) * 1.1);
   }
 }
 
