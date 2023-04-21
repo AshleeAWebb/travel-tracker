@@ -1,4 +1,4 @@
-let destinationData = [
+let testDestinationData = [
   {
     "id": 1,
     "destination": "Lima, Peru",
@@ -64,4 +64,4 @@ let destinationData = [
   }
 ]
 
-export { destinationData }
+export { testDestinationData }
