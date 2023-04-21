@@ -1,4 +1,4 @@
-import Destination from './destination';
+import Destination from '../src/Destination';
 import { destinationData } from './data/destination-data';
 
 class DestinationManager {
