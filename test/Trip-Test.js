@@ -22,39 +22,18 @@ describe('Trip', function() {
     expect(Trip).to.be.a("function");
   });
 
-  it.skip("should hold instances of trip", function () {
+  it.skip("should be an instances of trip", function () {
     expect(trip).to.be.an.instanceof(Trip)
   });
 
-  it.skip('should have a user ID', function () {
-    expect(trip.userID).to.equal(1);
-  });
-
-  it.skip('should have a trip ID', function () {
-    expect(trip.id).to.equal(117);
-  });
-
-  it.skip('should have a destination ID', function () {
-    expect(trip.destinationID).to.equal(28);
-  });
-
-  it.skip('should have a traveler quantity', function () {
-    expect(trip.travelers).to.equal(3);
-  });
-
-  it.skip('should have a trip date', function () {
-    expect(trip.date).to.equal('2022/01/09');
-  });
-
-  it.skip('should have a trip duration', function () {
-    expect(trip.duration).to.equal(15);
-  });
-
-  it.skip('should have a trip status', function () {
+  it.skip('should have a trip data', function () {
+    expect(trip.id).to.equal(1);
+    expect(trip.userID).to.equal(44);
+    expect(trip.destinationID).to.equal(49);
+    expect(trip.travelers).to.equal(1);
+    expect(trip.date).to.equal('2022/09/16');
+    expect(trip.duration).to.equal(8);
     expect(trip.status).to.equal('approved');
-  });
-
-  it.skip('should have a suggested activities array', function () {
     expect(trip.suggestedActivities).to.deep.equal([]);
   });
 
