@@ -16,17 +16,18 @@ describe('Trip', function() {
     destination = new Destination(destinationData[0]);
     trip = new Trip(tripData[0]);
     traveler = new Traveler(travelerData[0]);
+    trip.tripDataLoad(tripData)
   });
 
-  it.skip("should be a function", function () {
+  it("should be a function", function () {
     expect(Trip).to.be.a("function");
   });
 
-  it.skip("should be an instances of trip", function () {
+  it("should be an instances of trip", function () {
     expect(trip).to.be.an.instanceof(Trip)
   });
 
-  it.skip('should have a trip data', function () {
+  it('should have a trip data', function () {
     expect(trip.id).to.equal(1);
     expect(trip.userID).to.equal(44);
     expect(trip.destinationID).to.equal(49);
@@ -37,12 +38,12 @@ describe('Trip', function() {
     expect(trip.suggestedActivities).to.deep.equal([]);
   });
 
-  it.skip("should calculate the total cost of a trip", function () {
-    expect(trip.costPerTrip(destination)).to.equal()
+  it("should calculate the total cost of a trip", function () {
+    expect(trip.costPerTrip(destination)).to.equal();
   });
 
-  it.skip("should find trips by traveler ID", function () {
-    expect(trip.tripsOfTravelers(traveler)).to.deep.equal([
+  it("should find trips by traveler ID", function () {
+    expect(trip.tripsByTraveler(traveler)).to.deep.equal([
          {
           "id": 1,
           "userID": 44,
@@ -56,8 +57,8 @@ describe('Trip', function() {
       ]);
   });
 
-  it.skip("should calculate the total cost of annual trips for a user", function () {
-    expect(trip.travelCostByYear(destination, traveler)).to.equal()
+  it("should calculate the total cost of annual trips for a user", function () {
+    expect(trip.yearlyCost(destination, traveler)).to.equal();
   });
 
 })
