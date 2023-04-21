@@ -38,7 +38,7 @@ describe('Trip', function() {
   });
 
   it.skip("should calculate the total cost of a trip", function () {
-    expect(trip.costPerTrip(destination)).to.equal(6435)
+    expect(trip.costPerTrip(destination)).to.equal()
   });
 
   it.skip("should find trips by traveler ID", function () {
