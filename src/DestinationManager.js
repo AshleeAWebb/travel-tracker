@@ -6,21 +6,21 @@ class DestinationManager {
     this.allDestinations = destinationData.map((destinationInfo) => new Destination(destinationInfo));
   }
 
-  findDestObject(destinationID) {
+  loadDestinationInfo(destinationID) {
     return this.allDestinations.find(destination => destination.id === destinationID);
   }
 
   findFlightCost(destinationID) {
-    const destination = this.findDestObject(destinationID);
+    const destination = this.loadDestinationInfo(destinationID);
     return destination.estimatedFlightCostPerPerson;
   }
 
   findLodgingCost(destinationID) {
-    const destination = this.findDestObject(destinationID);
+    const destination = this.loadDestinationInfo(destinationID);
     return destination.estimatedLodgingCostPerDay;
   }
 
-  findDestByName(name) {
+  findDestinationByName(name) {
     return this.allDestinations.find(destination => destination.destination === name).id;
   }
 }

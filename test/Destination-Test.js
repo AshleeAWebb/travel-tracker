@@ -64,8 +64,8 @@ describe('DestinationManager', function() {
   });
 
   it('should find a destination by the ID', function() {
-    const destObject = destinationManager.findDestObject(1);
-    expect(destObject).to.deep.equal({
+    const destinationInfo = destinationManager.loadDestinationInfo(1);
+    expect(destinationInfo).to.deep.equal({
       "id": 1,
       "destination": "Lima, Peru",
       "estimatedLodgingCostPerDay": 70,
@@ -76,7 +76,7 @@ describe('DestinationManager', function() {
   });
 
   it('should find a destination ID by name', function() {
-    expect(destinationManager.findDestByName("Stockholm, Sweden")).to.equal(2);
+    expect(destinationManager.findDestinationByName("Stockholm, Sweden")).to.equal(2);
   });
 
   it('should calculate the flight cost of a trip', function() {
