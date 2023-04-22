@@ -105,6 +105,16 @@ p {
   margin: 20px;
 }
 
+.pending-trip {
+  display: flex;
+  justify-content: space-between;
+  align-content: stretch;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin: 20px;
+}
+
 .card {
   max-width: 200px;
   background: rgba(244, 220, 204, 0.8);
