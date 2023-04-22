@@ -1,59 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Travel Tracker App</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-
+  <title>Horizon's Edge Travel App</title>
+  <link rel="stylesheet" href="css/styles.css"></head>
 <body>
   <header>
-    <h1>Travel Tracker</h1>
+    <h1>Horizon's Edge</h1>
     <nav>
       <button class="button-login">Log in</button>
     </nav>
   </header>
   <main>
-
     <section>
-      <h2 id="welcomeTitle">Welcome to your Travel Tracker dashboard!</h2>
-
-      <!-- Travel columns -->
-      <section id="travelerTrips">Show Trips</section>
-      <!-- <section class="travel-columns">
-        <label for="travel-dropdown">Select Travel:</label>
-        <select class="travel-dropdown" id="travel-dropdown">
-          <option value="pending" selected>Pending Travel</option>
-          <option value="upcoming">Upcoming Travel</option>
-          <option value="past">Past Travel</option>
-        </select>
-
-        <div class="travel-box" id="pending-travel">
-          <h3>Pending Travel</h3>
-          <div></div>
-        </div>
-
-        <div class="travel-box" id="upcoming-travel" style="display:none;">
-          <h3>Upcoming Travel</h3>
-          <div></div>
-        </div>
-
-        <div class="travel-box" id="past-travel" style="display:none;">
-          <h3>Past Travel</h3>
-          <div></div>
-        </div>
-      </section> -->
-
+      <h2 id="welcomeTitle">Welcome to your Horizon's Edge dashboard!</h2>
+      <!-- Travel columns  -->
+      <section class="traveler-trip" id="travelerTrips">Show Trips</section>
       <!-- Cost Dounut Chart -->
       <section>
         <h2>Total Amount Spent This Year (including 10% travel agent fee)</h2>
         <p id="totalSpent"></p>
       </section>
-
-      <!-- Book Trip -->
+      <!-- Book Trip  -->
       <section class="book-trip">
         <h2>Book a Trip</h2>
         <button id="open-modal-btn">Book Trip!</button>
@@ -62,7 +32,7 @@
             <span class="close">&times;</span>
             <form>
               <label for="date">Date:</label>
-              <input type="date" id="date" name="date" required>
+              <input type="date" id="date" name="date" required aria-label="Select trip date">
               <br><br>
               <input type="submit" value="Submit">
             </form>
@@ -73,5 +43,4 @@
   </main>
   <script src="bundle.js"></script>
 </body>
-
 </html>

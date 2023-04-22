@@ -19,21 +19,21 @@ describe('Data HandDataHandler', function() {
   });
 
   it('should start with no trip data', function() {
-    expect(dataHandler.allTrips).to.be.null;
+    expect(dataHandler.trips).to.be.null;
   });
 
   it('should set data into the correct place', function() {
-    expect(dataHandler.allTrips).to.be.null;
-    dataHandler.setData('allTrips', testData.testTripData);
-    expect(dataHandler.allTrips).to.deep.equal(testData.testTripData);
+    expect(dataHandler.trips).to.be.null;
+    dataHandler.setData('trips', testData.testTripData);
+    expect(dataHandler.trips).to.deep.equal(testData.testTripData);
   });
 
 
   it('should return specific data by ID', function() {
-    dataHandler.setData('allTrips', testData.testTripData);
-    expect(dataHandler.getDataByID('allTrips', 'id', 1)).to.deep.equal([testData.testTripData[0]]);
-    expect(dataHandler.getDataByID('allTrips', 'userID', 1)).to.deep.equal([testData.testTripData[0], testData.testTripData[2], testData.testTripData[4]]);
-    expect(dataHandler.getDataByID('allTrips', 'destinationID', 1)).to.deep.equal([testData.testTripData[0]]);
+    dataHandler.setData('trips', testData.testTripData);
+    expect(dataHandler.getDataByID('trips', 'id', 1)).to.deep.equal([testData.testTripData[0]]);
+    expect(dataHandler.getDataByID('trips', 'userID', 1)).to.deep.equal([testData.testTripData[0], testData.testTripData[2], testData.testTripData[4]]);
+    expect(dataHandler.getDataByID('trips', 'destinationID', 1)).to.deep.equal([testData.testTripData[0]]);
   });
   
   it('should return a list of all destination names', function() {
