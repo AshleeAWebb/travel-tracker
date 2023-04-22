@@ -30,7 +30,7 @@ const apiCalls = new ApiCalls(),
 
 // Event Listeners
 window.addEventListener('load', () => {
-  getFetch(9)
+  getFetch(4)
 });
 
 openModalBtn.addEventListener('click', function () {
@@ -107,6 +107,7 @@ const handleTripSelection = (event) => {
   const tripSelectDate = document.getElementById('date');
   const tripSelectDuration = document.getElementById('duration');
 
+  
   const pendingTripData = {
     id: dataHandler.allTrips.length + 1,
     userID: traveler.id,
@@ -117,7 +118,7 @@ const handleTripSelection = (event) => {
     status: 'pending', 
     suggestedActivities: []
   };
-
+  console.log(dataHandler.allTrips.length)
   updateDashboard(pendingTripData, tripRequestLocation);
 };
 
@@ -148,6 +149,8 @@ const updateDashboard = (tripData, tripRequestLocation) => {
   confirmButton.addEventListener('click', () => {
     apiCalls.postTripsData('trips', tripData)
       .then(() => {
+        dataHandler.allTrips.push(tripData);
+        tripData.id = dataHandler.allTrips.length + 1;
         trip.status = 'pending';
         tripCard.querySelector('.trip-details').innerHTML += '<div>pending</div>';
   
