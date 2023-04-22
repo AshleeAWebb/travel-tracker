@@ -1,3 +1,4 @@
+import Destination from "./Destination";
 class Trip {
   constructor(tripData) {
     this.id = tripData.id;
@@ -11,9 +12,6 @@ class Trip {
     this.trips = [];
   }
 
-  // loadTripInfo(tripData) {
-  //   this.trips = tripData.map((tripInfo) => new Trip(tripInfo));
-  // }
 
   costPerTrip(trip, destination) {
     const totalLodgingCost = destination.lodgingCost * trip.duration * trip.travelers;

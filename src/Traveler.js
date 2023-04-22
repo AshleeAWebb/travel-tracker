@@ -8,6 +8,7 @@ class Traveler {
     this.travelerType = travelerData.travelerType;
   }
 
+
   findTravelerTrips(tripData) {
     this.trips = tripData.filter((trip)=> trip.userID === this.id);
   }
@@ -22,3 +23,4 @@ class Traveler {
 
 }
 export default Traveler;
+
