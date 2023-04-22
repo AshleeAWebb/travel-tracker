@@ -8,8 +8,8 @@ class Destination {
     this.alt = destinationData.alt;
   }
 
-  findDestObject(destinationID) {
-    return this.allDestinations.find(destination => destination.id === destinationID);
+  findDestinationTrips(destinationID) {
+    this.destinations = destinationID.find((destination) => destination.id === this.id);
   }
 
   findFlightCost(destinationID) {
@@ -23,7 +23,7 @@ class Destination {
   }
 
   findDestByName(name) {
-    return this.allDestinations.find(destination => destination.destination === name).id;
+    return destination.find(destination => destination.destination === name).id;
   }
 }
 

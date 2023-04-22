@@ -9,7 +9,7 @@ const fetchAPI = (url) =>
 
  const fetchAllData = () => {
   return Promise.all([
-  fetchAPI(`http://localhost:3001/api/v1/travelers/1`),
+  fetchAPI(`http://localhost:3001/api/v1/travelers/7`),
   fetchAPI('http://localhost:3001/api/v1/trips'),
   fetchAPI('http://localhost:3001/api/v1/destinations')
   ]);

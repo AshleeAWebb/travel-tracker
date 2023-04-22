@@ -16,35 +16,10 @@ const dropdown = document.querySelector('#travel-dropdown'),
   pastTravel = document.querySelector('#past-travel'),
   openModalBtn = document.querySelector('#open-modal-btn'),
   closeModalBtn = document.querySelector('.close'),
-  modal = document.querySelector('#modal');
-
-
-
-if (dropdown.value === 'pending') {
-  pendingTravel.style.display = 'block';
-} else if (dropdown.value === 'upcoming') {
-  upcomingTravel.style.display = 'block';
-} else if (dropdown.value === 'past') {
-  pastTravel.style.display = 'block';
-}
-
-dropdown.addEventListener('change', function () {
-  if (dropdown.value === 'pending') {
-    pendingTravel.style.display = 'block';
-    upcomingTravel.style.display = 'none';
-    pastTravel.style.display = 'none';
-  } else if (dropdown.value === 'upcoming') {
-    pendingTravel.style.display = 'none';
-    upcomingTravel.style.display = 'block';
-    pastTravel.style.display = 'none';
-  } else if (dropdown.value === 'past') {
-    pendingTravel.style.display = 'none';
-    upcomingTravel.style.display = 'none';
-    pastTravel.style.display = 'block';
-  }
-});
-
-
+  modal = document.querySelector('#modal'),
+  welcome = document.getElementById('welcomeTitle'),
+  tripDisplay = document.getElementById('travelerTrips'),
+  yearlyCostDisplay = document.getElementById('totalSpent');
 
 // Event Listeners
 
@@ -73,19 +48,39 @@ function getFetch() {
   .then(data => {
     traveler = new Traveler(data[0]);
     tripData = data[1].trips;
-    trips = new Trip(tripData)
+    trips = new Trip(tripData);
     destinationData = data[2].destinations;
-    destinations = new Destination(destinationData)
-    viewTravelerDashboard()
+    destinations = new Destination(destinationData);
+    viewTravelerDashboard();
+    displayTotalForYear();
   })
 }
 
-function viewTravelerDashboard() {
-  traveler.findTravelerTrips(tripData)
-  console.log(traveler)
-}
+    function viewTravelerDashboard() {
+      welcome.innerHTML=`Welcome ${traveler.name} to your travel dashboard`
+      traveler.findTravelerTrips(tripData)
+      tripDisplay.innerHTML = ''
+      traveler.trips.forEach(trip => {
+        tripDisplay.innerHTML += `<article class="trip">
+          <div class="destination-img trip-card"><img class= "trip-image" src="${destinations.image}" alt="${destinations.alt}"></div>
+          <p class="trip-destination trip-card"> Destination: ${destinations.destination} </p>
+          <p class="trip-date trip-card"> Date: ${trip.date} </p>
+          <p class="trip-duration trip-card"> Duration: ${trip.duration} </p>
+          <p class="trip-travelers trip-card"> Travelers: ${trip.travelers} </p>
+          <p class="trip-status trip-card"> Status: ${trip.status} </p>
+        </article>`
+      })
+    }
 
-// getFetch()
+    function displayTotalForYear() {
+      yearlyCostDisplay.innerHTML += trips.yearlyCost(destinations, traveler)
+    }
+
+
+window.addEventListener('load', () => {
+  getFetch()
+})
+
 // function show(element) {
 //   element.classList.remove('hidden');
 // };
@@ -93,7 +88,3 @@ function viewTravelerDashboard() {
 // function hide(element) {
 //   element.classList.add('hidden');
 // };
-
-window.addEventListener('load', () => {
-  getFetch()
-})

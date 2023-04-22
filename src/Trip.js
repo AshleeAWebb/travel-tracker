@@ -27,7 +27,7 @@ class Trip {
 
   yearlyCost(destination, traveler, year) {
     const travelerTrips = this.tripsByTraveler(traveler);
-    const tripsByYear = travelerTrips.filter(trip => trip.date.includes(year) && trip.status === "approved");
+    const tripsByYear = travelerTrips.filter(trip => trip.date && trip.status === "approved");
     const totalCostOfTripsAnnually = tripsByYear.reduce((num, trip) => {
       num += this.costPerTrip(trip, destination);
       return num;
