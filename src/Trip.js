@@ -9,16 +9,29 @@ class Trip {
     this.duration = tripData.duration;
     this.status = tripData.status;
     this.suggestedActivities = tripData.suggestedActivities;
+    this.trips = [];
   }
 
-  costPerTrip(destination) {
-    if (!destination || !destination.estimatedLodging || !destination.estimatedFlight) {
-      return 0;
-    }
-    const totalLodgingCost = destination.estimatedLodging * this.duration * this.travelers;
-    const totalFlightCost = destination.estimatedFlight * this.travelers;
+
+  costPerTrip(trip, destination) {
+    const totalLodgingCost = destination.lodgingCost * trip.duration * trip.travelers;
+    const totalFlightCost = destination.flightCost * trip.travelers;
     return Math.round((totalLodgingCost + totalFlightCost) * 1.1);
   }
-}
 
+  tripsByTraveler(traveler) {
+    return this.trips.filter((trip) => trip.id === traveler.id);
+  }
+
+  yearlyCost(destination, traveler, year) {
+    const travelerTrips = this.tripsByTraveler(traveler);
+    const tripsByYear = travelerTrips.filter(trip => trip.date && trip.status === "approved");
+    const totalCostOfTripsAnnually = tripsByYear.reduce((num, trip) => {
+      num += this.costPerTrip(trip, destination);
+      return num;
+    }, 0);
+    return Math.round(totalCostOfTripsAnnually);
+  }
+
+}
 export default Trip;

@@ -7,6 +7,24 @@ class Destination {
     this.image = destinationData.image;
     this.alt = destinationData.alt;
   }
+
+  findDestinationTrips(destinationID) {
+    this.destinations = destinationID.find((destination) => destination.id === this.id);
+  }
+
+  findFlightCost(destinationID) {
+    const destination = this.findDestObject(destinationID);
+    return destination.estimatedFlightCostPerPerson;
+  }
+
+  findLodgingCost(destinationID) {
+    const destination = this.findDestObject(destinationID);
+    return destination.estimatedLodgingCostPerDay;
+  }
+
+  findDestByName(name) {
+    return destination.find(destination => destination.destination === name).id;
+  }
 }
 
 export default Destination;
