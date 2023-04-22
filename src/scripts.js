@@ -132,7 +132,7 @@ const updateDashboard = (tripData, tripRequestLocation) => {
     <img class="card" src="${trip.destination.image}" alt="${trip.destination.alt}">
     <div class="trip-details">
       <div>${trip.destination.destination}</div>
-      <div>$${trip.calculateTripCost()}</div>
+      <div>Estimated Cost $${trip.calculateTripCost()}</div>
       <div>${trip.duration} days</div>
       <div>${trip.travelers} travelers</div>
       <div>${trip.date}</div>
@@ -153,9 +153,11 @@ const updateDashboard = (tripData, tripRequestLocation) => {
         tripData.id = dataHandler.allTrips.length + 1;
         trip.status = 'pending';
         tripCard.querySelector('.trip-details').innerHTML += '<div>pending</div>';
+        
   
         yearlyCostDisplay.innerText = `Spent this year $${traveler.getYearlySpent()}`;
         tripCard.querySelector('.action-buttons').remove();
+        tripCard.querySelector('.trip-details div:nth-child(2)').innerHTML = `$${trip.calculateTripCost()}`;
       })
       .catch(error => {
         console.error('Error booking trip:', error);
