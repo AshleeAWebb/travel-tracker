@@ -18,6 +18,7 @@
       <h2 id="welcomeTitle">Welcome to your Horizon's Edge dashboard!</h2>
       <!-- Travel columns  -->
       <section class="traveler-trip" id="travelerTrips">Show Trips</section>
+      <section class="pending-trip" id="pendingTrips">Pending Trips</section>
       <!-- Cost Dounut Chart -->
       <section>
         <h2>Total Amount Spent This Year (including 10% travel agent fee)</h2>
@@ -30,9 +31,25 @@
         <div id="modal" class="modal">
           <div class="modal-content">
             <span class="close">&times;</span>
-            <form>
+            <form id="trip-form">
               <label for="date">Date:</label>
               <input type="date" id="date" name="date" required aria-label="Select trip date">
+              <br><br>
+              <label for="duration">Duration:</label>
+              <input type="number" id="duration" name="duration" required aria-label="Enter trip duration">
+              <br><br>
+              <label for="travelers">Number of Travelers:</label>
+              <input type="number" id="travelers" name="travelers" required aria-label="Enter number of travelers">
+              <br><br>
+              <label for="destination">Destination:</label>
+              <select id="destination" name="destination" required aria-label="Select trip destination">
+                <option value="">--Please choose an option--</option>
+              </select>
+              <br><br>
+              </select>
+              <br><br>
+              <label for="suggestedActivities">Suggested Activities:</label>
+              <input type="text" id="suggestedActivities" name="suggestedActivities" aria-label="Enter suggested activities (comma-separated)">
               <br><br>
               <input type="submit" value="Submit">
             </form>

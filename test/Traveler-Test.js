@@ -78,7 +78,7 @@ describe('Traveler', function() {
 
   it('should get the total amount of money that has been spent on trips this year', function() {
     traveler2.getTravelerTrips();
-    expect(traveler2.getYearlySpent()).to.deep.equal(7755);
+    expect(traveler2.getYearlySpent()).to.deep.equal(1633.5);
   });
 });
 

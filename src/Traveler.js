@@ -34,6 +34,7 @@ export default class Traveler {
       return total;
     }, 0);
     const commission = totalCost * 0.1;
-    return commission + totalCost;
-  }
-}
+    const displayTotal = (commission + totalCost).toFixed(2);
+    return displayTotal;
+  };
+};

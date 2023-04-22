@@ -1,6 +1,6 @@
 export default class DataHandler {
   constructor() {
-    this.trips = null;
+    this.allTrips = null;
     this.destinations = null;
   };
 
