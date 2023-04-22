@@ -1,27 +1,33 @@
-// Import data
-import ApiCalls from './apiCalls';
+// Import API's
+import ApiCalls from '../src/ApiCalls';
 
-// Import style and img
+// Import styles and images
 import './css/styles.css';
 import './images/travel-tracker-login.jpg';
 
 // Import classes
 import Traveler from '../src/Traveler';
-// import Trip from '../src/Trip';
-import DataHandler from './DataHandler';
+import DataHandler from '../src/DataHandler';
 
-const dropdown = document.querySelector('#travel-dropdown'),
-  pendingTravel = document.querySelector('#pending-travel'),
-  upcomingTravel = document.querySelector('#upcoming-travel'),
-  pastTravel = document.querySelector('#past-travel'),
-  openModalBtn = document.querySelector('#open-modal-btn'),
-  closeModalBtn = document.querySelector('.close'),
-  modal = document.querySelector('#modal'),
-  welcome = document.getElementById('welcomeTitle'),
-  tripDisplay = document.getElementById('travelerTrips'),
-  yearlyCostDisplay = document.getElementById('totalSpent');
+// Query Selectors
+const openModalBtn = document.getElementById('open-modal-btn'),
+      closeModalBtn = document.querySelector('.close'),
+      modal = document.getElementById('modal'),
+      welcome = document.getElementById('welcomeTitle'),
+      tripDisplay = document.getElementById('travelerTrips'),
+      yearlyCostDisplay = document.getElementById('totalSpent');
+
+// Global Variables
+let traveler;
+const apiCalls = new ApiCalls(),
+      dataHandler = new DataHandler();
+
+
 
 // Event Listeners
+window.addEventListener('load', () => {
+  getFetch(9)
+});
 
 openModalBtn.addEventListener('click', function () {
   modal.style.display = 'block';
@@ -37,10 +43,33 @@ modal.addEventListener('click', function (event) {
   }
 });
 
-let traveler;
+// Functions
+const displayUserInfo = (user) => {
+  welcome.innerText = `Hello, ${user.name}! Get ready to chase the sunset with Horizon's Edge.`;
+  yearlyCostDisplay.innerText = `Spent this year $${user.getYearlySpent()}`;
+}
 
-const apiCalls = new ApiCalls();
-const dataHandler = new DataHandler();
+const displayTravelCards = () => {
+  const travelerTrips = traveler.getTravelerTrips();
+  tripDisplay.innerHTML = '';
+  if (travelerTrips.length === 0) {
+    tripDisplay.innerHTML = '<h3>No trips found</h3>';
+  } else {
+    travelerTrips.forEach(data =>  {
+      tripDisplay.innerHTML +=
+        `<div class="card" value="${data.id}">
+          <img class="card" src="${data.destination.image}" alt="${data.destination.alt}">
+          <div>${data.destination.destination}</div>
+          <div>$${data.calculateTripCost()}</div>
+          <div>${data.duration} days</div>
+          <div>${data.travelers} travelers</div>
+          <div>${data.date}</div>
+          <div>${data.timeFrame}</div>
+          <div>${data.status}</div>
+        </div>`
+    });
+  }
+};
 
 const getFetch = (userID) => {
   apiCalls.fetchAllData('trips')
@@ -57,47 +86,11 @@ const getFetch = (userID) => {
       return traveler.getTravelerTrips();
     })
     .then(() => {
-      viewTravelerDashboard();
-      // displayTotalForYear();
+      displayUserInfo(traveler);
+      displayTravelCards();
     })
     .catch(error => {
-      const errorMessage = document.createElement('p');
-      errorMessage.textContent = 'Whoa, wipeout! Something went wrong. Hang ten and try again later.';
-      document.querySelector('.error-container').appendChild(errorMessage);
       console.error(error);
     });
 };
 
-
-    function viewTravelerDashboard() {
-      welcome.innerHTML=`Welcome ${traveler.name} to your travel dashboard`
-      // traveler.getTravelerTrips()
-      // tripDisplay.innerHTML = ''
-      // traveler.trips.forEach(trip => {
-      //   tripDisplay.innerHTML += `<article class="trip">
-      //     <div class="destination-img trip-card"><img class= "trip-image" src="${destinations.image}" alt="${destinations.alt}"></div>
-      //     <p class="trip-destination trip-card"> Destination: ${destinations.destination} </p>
-      //     <p class="trip-date trip-card"> Date: ${trip.date} </p>
-      //     <p class="trip-duration trip-card"> Duration: ${trip.duration} </p>
-      //     <p class="trip-travelers trip-card"> Travelers: ${trip.travelers} </p>
-      //     <p class="trip-status trip-card"> Status: ${trip.status} </p>
-      //   </article>`
-      // })
-    }
-
-    // function displayTotalForYear() {
-    //   yearlyCostDisplay.innerHTML += trips.getYearlySpent(destinations, traveler)
-    // }
-
-
-window.addEventListener('load', () => {
-  getFetch(1)
-})
-
-// function show(element) {
-//   element.classList.remove('hidden');
-// };
-
-// function hide(element) {
-//   element.classList.add('hidden');
-// };

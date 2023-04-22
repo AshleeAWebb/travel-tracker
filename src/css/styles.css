@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  border: #6148b0 1px solid;
+  /* border: #6148b0 1px solid; */
 }
 
 body {
@@ -77,6 +77,10 @@ h2 {
   width: 80%;
 }
 
+p {
+  text-align: center;
+}
+
 .close {
   color: #aaa;
   float: right;
@@ -91,26 +95,22 @@ h2 {
   cursor: pointer;
 }
 
-ul {
-  list-style: none;
-  margin: 10px;
-}
-
-li {
-  padding: 40px;
-}
-
-.travel-columns {
+.traveler-trip {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-content: stretch;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
-  list-style: none;
   margin: 20px;
 }
 
+.card {
+  max-width: 200px;
+  background: rgba(244, 220, 204, 0.8);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
 .travel-dropdown::-ms-expand {
   display: none;
 }
