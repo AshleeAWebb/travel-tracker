@@ -105,6 +105,11 @@ p {
   margin: 20px;
 }
 
+.donut-chart {
+  width: 5px;
+  height: 5px;
+}
+
 .pending-trip {
   display: flex;
   justify-content: space-between;

@@ -4,6 +4,8 @@ import ApiCalls from '../src/ApiCalls';
 // Import styles and images
 import './css/styles.css';
 import './images/travel-tracker-login.jpg';
+import { generateDonutChart } from '../src/charts';
+import { Chart } from 'chart.js/auto';
 
 // Import classes
 import Traveler from '../src/Traveler';
@@ -64,6 +66,7 @@ const displayUserInfo = (user) => {
 
 const populateDestinationsDropdown = (destinations) => {
   const destinationSelect = document.getElementById('destination');
+  destinations.sort((a, b) => a.destination.localeCompare(b.destination));
   destinations.forEach(destination => {
     const option = document.createElement('option');
     option.value = destination.id;
@@ -107,7 +110,6 @@ const handleTripSelection = (event) => {
   const tripSelectDate = document.getElementById('date');
   const tripSelectDuration = document.getElementById('duration');
 
-  
   const pendingTripData = {
     id: dataHandler.allTrips.length + 1,
     userID: traveler.id,
@@ -186,9 +188,14 @@ const getFetch = (userID) => {
     .then(() => {
       displayUserInfo(traveler);
       displayTravelCards();
+
+      const totalSpent = traveler.getYearlySpent();
+      const travelAgentFee = totalSpent * 0.1;
+      const netTotal = totalSpent - travelAgentFee;
+
+      generateDonutChart(totalSpent, travelAgentFee, netTotal);
     })
     .catch(error => {
       console.error(error);
     });
 };
-
