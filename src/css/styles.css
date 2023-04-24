@@ -5,17 +5,21 @@
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  background: radial-gradient(circle, #d68c7a 0%, #ba759A 50%, #6148b0 100%);
+  background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70% ,#b9799c 90%);
   font-size: 20px;
+  font-family: 'Lato', sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
+  font-family: 'Original Surfer', cursive;
   position: relative;
   min-width: 1346px;
   min-height: 98.83px;
-  background: rgba(244, 220, 204, 0.5);
+  background: rgba(244, 220, 204, 0.8);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
   justify-content: space-between;
@@ -23,26 +27,32 @@ header {
   align-items: center;
 }
 
-button,
-.travel-dropdown {
+h1 {
+  margin: 10px;
+}
+
+h2{
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  font-family: 'Original Surfer', cursive;
   border-radius: 50px;
   background: rgba(244, 220, 204, 0.5);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
   padding: 10px;
   border: none;
-  font-size: 20px;
+  font-size: 30px;
   cursor: pointer;
+  margin: 15px;
 }
 
 button:hover,
 .travel-dropdown:hover {
   background-color: #544948;
   color: white;
-}
-
-h2 {
-  display: flex;
-  justify-content: center;
 }
 
 .book-trip {
@@ -52,6 +62,7 @@ h2 {
   align-items: center;
 }
 
+
 .dashboard-container {
   height: 100%;
 }
@@ -60,21 +71,56 @@ h2 {
   display: none;
   position: fixed;
   z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  width: 75%;
+  height: 50%;
+  max-width: fit-content;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-  background: rgba(244, 220, 204, 0.8);
+  font-family: 'Lato', sans-serif;
+  background: rgba(244, 220, 204);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+  border-radius: 30px;
+  text-align: center;
+}
+
+.input-box {
+  padding: 2%;
+  width: 500px;
+  justify-content: space-between;
+}
+
+input {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Lato', sans-serif;
+  border-radius: 50px;
+}
+
+input:focus {
+  outline: none;
+  border-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+input:hover {
+  background-color: #544948;
+  color: white;
+}
+
+.close-btn {
+  margin: 10px;
+  color: black;
+  float: right;
+  font-size: 36px;
+  font-weight: bold;
 }
 
 p {
@@ -96,6 +142,7 @@ p {
 }
 
 .traveler-trip {
+  font-family: 'Lato', sans-serif;
   display: flex;
   justify-content: space-between;
   align-content: stretch;
@@ -103,11 +150,6 @@ p {
   flex-wrap: nowrap;
   align-items: center;
   margin: 20px;
-}
-
-.donut-chart {
-  width: 5px;
-  height: 5px;
 }
 
 .pending-trip {
@@ -125,15 +167,36 @@ p {
   background: rgba(244, 220, 204, 0.8);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   text-align: center;
-}
-.travel-dropdown::-ms-expand {
-  display: none;
+  border-radius: 30px;
 }
 
-.travel-dropdown::after {
-  content: '\25BC';
-  color: white;
-  margin-right: 10px;
+.finance-card-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.finance-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(244, 220, 204, 0.8);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  max-width: calc(100% - 20px); 
+}
+
+.chart-container {
+  max-width: 90%;
+  height: 350px;
+  position: relative;
+  margin: 5px;
+}
+.confirm-button,
+.decline-button {
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  padding: 5px;
 }
 
 @media (min-width: 768px) {

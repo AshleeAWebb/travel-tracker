@@ -32,7 +32,7 @@ const apiCalls = new ApiCalls(),
 
 // Event Listeners
 window.addEventListener('load', () => {
-  getFetch(4)
+  getFetch(8)
 });
 
 openModalBtn.addEventListener('click', function () {
@@ -60,9 +60,9 @@ tripForm.addEventListener('submit', function(event) {
   
 // Functions
 const displayUserInfo = (user) => {
-  welcome.innerText = `Hello, ${user.name}! Get ready to chase the sunset with Horizon's Edge.`;
+  welcome.innerHTML = `<h4>Hello, ${user.name}! Get ready to chase the sunset with Horizon's Edge.</h4>`;
   yearlyCostDisplay.innerText = `Spent this year $${user.getYearlySpent()}`;
-}
+};
 
 const populateDestinationsDropdown = (destinations) => {
   const destinationSelect = document.getElementById('destination');
@@ -82,6 +82,8 @@ const displayTravelCards = () => {
     tripDisplay.innerHTML = '<h3>No trips found</h3>';
   } else {
     travelerTrips.forEach(data =>  {
+      const tripDate = new Date(data.date);
+      const formattedDate = tripDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       tripDisplay.innerHTML +=
         `<div class="card" value="${data.id}">
           <img class="card" src="${data.destination.image}" alt="${data.destination.alt}">
@@ -89,7 +91,7 @@ const displayTravelCards = () => {
           <div>$${data.calculateTripCost()}</div>
           <div>${data.duration} days</div>
           <div>${data.travelers} travelers</div>
-          <div>${data.date}</div>
+          <div>${formattedDate}</div>
           <div>${data.timeFrame}</div>
           <div>${data.status}</div>
         </div>`
@@ -110,6 +112,24 @@ const handleTripSelection = (event) => {
   const tripSelectDate = document.getElementById('date');
   const tripSelectDuration = document.getElementById('duration');
 
+  if (tripSelectDuration.value < 1) {
+    alert('Please enter a valid trip duration');
+    return;
+  }
+
+  if (tripSelectTravelers.value < 1) {
+    alert('Please enter a valid number of travelers');
+    return;
+  }
+
+  const today = new Date();
+  const selectedDate = new Date(tripSelectDate.value);
+
+  if (selectedDate < today) {
+    alert('Please select a future date');
+    return;
+  }
+
   const pendingTripData = {
     id: dataHandler.allTrips.length + 1,
     userID: traveler.id,
@@ -120,7 +140,7 @@ const handleTripSelection = (event) => {
     status: 'pending', 
     suggestedActivities: []
   };
-  console.log(dataHandler.allTrips.length)
+
   updateDashboard(pendingTripData, tripRequestLocation);
 };
 
@@ -140,8 +160,8 @@ const updateDashboard = (tripData, tripRequestLocation) => {
       <div>${trip.date}</div>
     </div>
     <div class="action-buttons">
-      <button class="confirm-button">BOOK</button>
-      <button class="decline-button">CANCEL</button>
+      <button class="confirm-button">Book</button>
+      <button class="decline-button">Cancel</button>
     </div>
   `;
   tripRequestLocation.appendChild(tripCard);
@@ -190,10 +210,10 @@ const getFetch = (userID) => {
       displayTravelCards();
 
       const totalSpent = traveler.getYearlySpent();
-      const travelAgentFee = totalSpent * 0.1;
-      const netTotal = totalSpent - travelAgentFee;
+      const amountSpent = totalSpent / 1.1;
+      const commission = totalSpent - amountSpent;
 
-      generateDonutChart(totalSpent, travelAgentFee, netTotal);
+      generateDonutChart(traveler);
     })
     .catch(error => {
       console.error(error);
