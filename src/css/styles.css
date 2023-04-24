@@ -14,7 +14,6 @@ body {
 
 header {
   font-family: 'Original Surfer', cursive;
-  position: relative;
   min-width: 1346px;
   min-height: 98.83px;
   background: rgba(244, 220, 204, 0.8);
@@ -23,6 +22,7 @@ header {
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  z-index: 1;
 }
 
 h1 {
@@ -102,6 +102,9 @@ button:hover,
   z-index: 0;
 }
 
+.dashboard-page {
+  background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70% ,#b9799c 90%);
+}
 
 .dashboard-container {
   height: 100%;

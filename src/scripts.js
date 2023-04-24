@@ -63,6 +63,7 @@ tripForm.addEventListener('submit', function(event) {
 loginButton.addEventListener("click", function() {
   loginPage.classList.toggle("hidden");
 });
+
   
 // Functions
 const displayUserInfo = (user) => {

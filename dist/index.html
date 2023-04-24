@@ -22,7 +22,7 @@
   </header>
   <main>
     <!-- Login Page with picture -->
-    <section id="login-page" class="login-page">
+    <section id="loginPage" class="login-page">
       <div class="wrapper">
         <div class="background-container">
           <div class="background-image">
@@ -36,13 +36,13 @@
             <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <button type="submit">Login</button>
+            <button id="submitHomePageButton" type="submit">Login</button>
           </form>
         </div>
       </div>
     </section>
 
-    <section class="dashboard-page hidden">
+    <section class="dashboard-page" id="dashboardPage">
       <h2 id="welcomeTitle">Welcome to your Horizon's Edge dashboard!</h2>
       <!-- Travel columns  -->
       <section class="traveler-trip" id="travelerTrips"></section>
