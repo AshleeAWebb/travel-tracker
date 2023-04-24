@@ -17,11 +17,33 @@
   <header>
     <h1>Horizon's Edge</h1>
     <nav>
-      <button class="button-login" aria-label="Log in to your account">Log in</button>
+      <button id="login-button" class="button-login hidden" title="Log in to your account">Log in</button>
+
     </nav>
   </header>
   <main>
-    <section>
+    <!-- Login Page with picture -->
+    <section id="loginPage" class="login-page">
+      <div class="wrapper">
+        <div class="background-container">
+          <div class="background-image">
+            <img class="login-image" src="./images/travel-tracker-login.jpg" alt="building with pink haze sunset">
+          </div>
+          </div>
+        </div>
+        <div id="login-container" class="login-container">
+          <form class="login-form" id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button id="submitHomePageButton" type="submit">Login</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-page" id="dashboardPage">
       <h2 id="welcomeTitle">Welcome to your Horizon's Edge dashboard!</h2>
       <!-- Travel columns  -->
       <article>

@@ -20,7 +20,9 @@ const openModalBtn = document.getElementById('open-modal-btn'),
       tripDisplay = document.getElementById('travelerTrips'),
       yearlyCostDisplay = document.getElementById('totalSpent'),
       tripForm = document.getElementById('trip-form'),
-      tripRequestLocation = document.getElementById('pendingTrips');
+      tripRequestLocation = document.getElementById('pendingTrips'),
+      loginButton = document.getElementById("login-button"),
+      loginPage = document.getElementById("login-page");
       
 
 // Global Variables
@@ -57,6 +59,11 @@ tripForm.addEventListener('submit', function(event) {
   modal.style.display = 'none'; 
   tripForm.reset(); 
 });
+
+loginButton.addEventListener("click", function() {
+  loginPage.classList.toggle("hidden");
+});
+
   
 // Functions
 const displayUserInfo = (user) => {

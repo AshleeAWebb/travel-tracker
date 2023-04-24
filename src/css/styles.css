@@ -5,9 +5,7 @@
 }
 
 body {
-  min-height: 100vh;
   width: 100%;
-  background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70% ,#b9799c 90%);
   font-size: 20px;
   font-family: 'Lato', sans-serif;
   display: flex;
@@ -16,7 +14,6 @@ body {
 
 header {
   font-family: 'Original Surfer', cursive;
-  position: relative;
   min-width: 1346px;
   min-height: 98.83px;
   background: rgba(244, 220, 204, 0.8);
@@ -25,6 +22,7 @@ header {
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  z-index: 1;
 }
 
 h1 {
@@ -62,6 +60,51 @@ button:hover,
   align-items: center;
 }
 
+.login-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  z-index: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  padding: 15px;
+  font-family: 'Lato', sans-serif;
+  background: rgba(244, 220, 204, 0.5);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 300px;
+  height: 190px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-around;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  border-radius: 30px;
+  padding: 20px;
+}
+
+.login-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.dashboard-page {
+  background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70% ,#b9799c 90%);
+}
 
 .dashboard-container {
   height: 100%;
@@ -108,11 +151,6 @@ input:focus {
   outline: none;
   border-color: rgba(0, 0, 0, 0.25);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-input:hover {
-  background-color: #544948;
-  color: white;
 }
 
 .close-btn {
