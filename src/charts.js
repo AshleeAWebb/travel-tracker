@@ -1,37 +1,40 @@
-import { Chart } from 'chart.js';
+import { Chart } from 'chart.js/auto';
 
-export const generateDonutChart = (totalSpent, travelAgentFee, netTotal) => {
-  const donutChartCanvas = document.createElement('canvas');
-  donutChartCanvas.id = 'donutChart';
-  donutChartCanvas.setAttribute('width', '50');
-  donutChartCanvas.setAttribute('height', '50');
+export const generateDonutChart = (traveler) => {
+  const totalSpent = traveler.getYearlySpent();
+  const amountSpent = totalSpent / 1.1;
+  const commission = totalSpent - amountSpent;
 
-  const donutChartSection = document.createElement('section');
-  donutChartSection.appendChild(donutChartCanvas);
-  document.body.appendChild(donutChartSection);
+  const donutChartCanvas = document.getElementById('donutChartCanvas');
 
   const donutChart = new Chart(donutChartCanvas, {
     type: 'doughnut',
     data: {
-      labels: ['Total Spent', 'Travel Agent Fee'],
+      labels: ['Amount Spent', 'Travel Agent Fee'],
       datasets: [{
         label: 'Amount',
-        data: [netTotal, travelAgentFee],
-        backgroundColor: ['#544948', '#D094AD']
+        data: [amountSpent, commission],
+        backgroundColor: ['#D68C7A', '#544948']
       }]
     },
     options: {
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 20
+            }
+          }
+        }
+      },
       title: {
         display: true,
-        text: 'Total Amount Spent This Year (including 10% travel agent fee)'
-      }
+        text: 'Total Amount Spent This Year (including 10% travel agent fee)',
+        fontSize: 24 
+      },
     }
   });
 
-  donutChart.canvas.parentNode.style.height = '300px';
-  donutChartSection.style.display = 'flex';
-  donutChartSection.style.justifyContent = 'center';
-
   const totalSpentDisplay = document.getElementById('totalSpent');
-  totalSpentDisplay.innerText = `Total spent: $${totalSpent.toFixed(2)} | Travel agent fee: $${travelAgentFee.toFixed(2)} | Net total: $${netTotal.toFixed(2)}`;
+  totalSpentDisplay.innerText = `Total spent: $${totalSpent}`;
 };
