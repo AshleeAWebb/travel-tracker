@@ -21,10 +21,10 @@ const openModalBtn = document.getElementById('open-modal-btn'),
       yearlyCostDisplay = document.getElementById('totalSpent'),
       tripForm = document.getElementById('trip-form'),
       tripRequestLocation = document.getElementById('pendingTrips'),
-      loginButton = document.getElementById("login-button"),
+      logoutButton = document.getElementById("logoutButton"),
       loginPage = document.getElementById("loginPage"),
       dashboardPage = document.getElementById("dashboardPage"),
-      loginDashboardPage = document.getElementById("submitHomePageButton"),
+      loginDashboardButton = document.getElementById("submitHomePageButton"),
       loginForm = document.getElementById('login-form'),
       usernameInput = document.getElementById('username'),
       passwordInput = document.getElementById('password');
@@ -65,13 +65,15 @@ tripForm.addEventListener('submit', function(event) {
   tripForm.reset(); 
 });
 
-loginButton.addEventListener("click", function() {
+logoutButton.addEventListener("click", function() {
   loginPage.classList.toggle("hidden");
+  logoutButton.classList.toggle("hidden")
 });
 
-loginDashboardPage.addEventListener("click", function() {
-  loginDashboardPage.classList.toggle("hidden");
-  loginButton.classList.toggle("hidden")
+loginDashboardButton.addEventListener("click", function() {
+  loginDashboardButton.classList.toggle("hidden");
+  logoutButton.classList.toggle("hidden")
+  loginDashboardButton.classList.toggle("hidden");
 });
 
 loginForm.addEventListener('submit', function(event) {
@@ -86,8 +88,9 @@ loginForm.addEventListener('submit', function(event) {
       loginPage.classList.add('hidden');
       dashboardPage.classList.remove('hidden');
       getFetch(userId);
-      usernameInput.value = '';
-      passwordInput.value = '';
+      loginForm.reset(); 
+      loginDashboardPage.classList.remove('hidden');
+      logoutButton.classList.add('hidden');
     } else {
       alert('Invalid username or password. Please try again.');
     }
