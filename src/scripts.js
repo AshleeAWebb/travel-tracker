@@ -22,7 +22,12 @@ const openModalBtn = document.getElementById('open-modal-btn'),
       tripForm = document.getElementById('trip-form'),
       tripRequestLocation = document.getElementById('pendingTrips'),
       loginButton = document.getElementById("login-button"),
-      loginPage = document.getElementById("login-page");
+      loginPage = document.getElementById("loginPage"),
+      dashboardPage = document.getElementById("dashboardPage"),
+      loginDashboardPage = document.getElementById("submitHomePageButton"),
+      loginForm = document.getElementById('login-form'),
+      usernameInput = document.getElementById('username'),
+      passwordInput = document.getElementById('password');
       
 
 // Global Variables
@@ -34,7 +39,7 @@ const apiCalls = new ApiCalls(),
 
 // Event Listeners
 window.addEventListener('load', () => {
-  getFetch(8)
+  getFetch(userID)
 });
 
 openModalBtn.addEventListener('click', function () {
@@ -62,6 +67,31 @@ tripForm.addEventListener('submit', function(event) {
 
 loginButton.addEventListener("click", function() {
   loginPage.classList.toggle("hidden");
+});
+
+loginDashboardPage.addEventListener("click", function() {
+  loginDashboardPage.classList.toggle("hidden");
+  loginButton.classList.toggle("hidden")
+});
+
+loginForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const username = usernameInput.value;
+  const password = passwordInput.value;
+
+  if (username.startsWith('traveler')) {
+    const userId = parseInt(username.slice(8));
+    if (userId >= 1 && userId <= 50 && password === 'travel') {
+      loginPage.classList.add('hidden');
+      dashboardPage.classList.remove('hidden');
+      getFetch(userId);
+      usernameInput.value = '';
+      passwordInput.value = '';
+    } else {
+      alert('Invalid username or password. Please try again.');
+    }
+  }
 });
 
   
