@@ -20,7 +20,14 @@ const openModalBtn = document.getElementById('open-modal-btn'),
       tripDisplay = document.getElementById('travelerTrips'),
       yearlyCostDisplay = document.getElementById('totalSpent'),
       tripForm = document.getElementById('trip-form'),
-      tripRequestLocation = document.getElementById('pendingTrips');
+      tripRequestLocation = document.getElementById('pendingTrips'),
+      logoutButton = document.getElementById("logoutButton"),
+      loginPage = document.getElementById("loginPage"),
+      dashboardPage = document.getElementById("dashboardPage"),
+      loginDashboardButton = document.getElementById("submitHomePageButton"),
+      loginForm = document.getElementById('login-form'),
+      usernameInput = document.getElementById('username'),
+      passwordInput = document.getElementById('password');
       
 
 // Global Variables
@@ -32,7 +39,7 @@ const apiCalls = new ApiCalls(),
 
 // Event Listeners
 window.addEventListener('load', () => {
-  getFetch(8)
+  getFetch(userID)
 });
 
 openModalBtn.addEventListener('click', function () {
@@ -57,6 +64,39 @@ tripForm.addEventListener('submit', function(event) {
   modal.style.display = 'none'; 
   tripForm.reset(); 
 });
+
+logoutButton.addEventListener("click", function() {
+  loginPage.classList.toggle("hidden");
+  logoutButton.classList.toggle("hidden")
+});
+
+loginDashboardButton.addEventListener("click", function() {
+  loginDashboardButton.classList.toggle("hidden");
+  logoutButton.classList.toggle("hidden")
+  loginDashboardButton.classList.toggle("hidden");
+});
+
+loginForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const username = usernameInput.value;
+  const password = passwordInput.value;
+
+  if (username.startsWith('traveler')) {
+    const userId = parseInt(username.slice(8));
+    if (userId >= 1 && userId <= 50 && password === 'travel') {
+      loginPage.classList.add('hidden');
+      dashboardPage.classList.remove('hidden');
+      getFetch(userId);
+      loginForm.reset(); 
+      loginDashboardPage.classList.remove('hidden');
+      logoutButton.classList.add('hidden');
+    } else {
+      alert('Invalid username or password. Please try again.');
+    }
+  }
+});
+
   
 // Functions
 const displayUserInfo = (user) => {
