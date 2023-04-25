@@ -147,6 +147,43 @@ const displayTravelCards = () => {
   }
 };
 
+
+// POST and update Dashboard
+const handleTripSelection = (event) => {
+  event.preventDefault();
+  const destinationSelect = document.getElementById('destination');
+  const tripSelectTravelers = document.getElementById('travelers');
+  const tripSelectDate = document.getElementById('date');
+  const tripSelectDuration = document.getElementById('duration');
+
+  if (tripSelectDuration.value < 1) {
+    alert('Please enter a valid trip duration');
+    return;
+  }
+  if (tripSelectTravelers.value < 1) {
+    alert('Please enter a valid number of travelers');
+    return;
+  }
+  const today = new Date();
+  const selectedDate = new Date(tripSelectDate.value);
+
+  if (selectedDate < today) {
+    alert('Please select a future date');
+    return;
+  }
+  const pendingTripData = {
+    id: dataHandler.allTrips.length + 1,
+    userID: traveler.id,
+    destinationID: parseInt(destinationSelect.value),
+    travelers: tripSelectTravelers.value,
+    date: formatDate(tripSelectDate.value),
+    duration: tripSelectDuration.value,
+    status: 'pending',
+    suggestedActivities: []
+  };
+  updateDashboard(pendingTripData, tripRequestLocation);
+};
+
 const updateDashboard = (tripData, tripRequestLocation) => {
   const trip = new Trip(tripData, dataHandler);
   const tripCard = document.createElement('div');
@@ -176,6 +213,7 @@ const updateDashboard = (tripData, tripRequestLocation) => {
         tripData.id = dataHandler.allTrips.length + 1;
         trip.status = 'pending';
         tripCard.querySelector('.trip-details').innerHTML += '<div>pending</div>';
+        
         yearlyCostDisplay.innerText = `Spent this year $${traveler.getYearlySpent()}`;
         tripCard.querySelector('.action-buttons').remove();
         tripCard.querySelector('.trip-details div:nth-child(2)').innerHTML = `$${trip.calculateTripCost()}`;
@@ -189,39 +227,6 @@ const updateDashboard = (tripData, tripRequestLocation) => {
   });
 };
 
-// POST and update Dashboard
-const handleTripSelection = (event) => {
-  event.preventDefault();
-  const destinationSelect = document.getElementById('destination');
-  const tripSelectTravelers = document.getElementById('travelers');
-  const tripSelectDate = document.getElementById('date');
-  const tripSelectDuration = document.getElementById('duration');
-  if (tripSelectDuration.value < 1) {
-    alert('Please enter a valid trip duration');
-    return;
-  }
-  if (tripSelectTravelers.value < 1) {
-    alert('Please enter a valid number of travelers');
-    return;
-  }
-  const today = new Date();
-  const selectedDate = new Date(tripSelectDate.value);
-  if (selectedDate < today) {
-    alert('Please select a future date');
-    return;
-  }
-  const pendingTripData = {
-    id: dataHandler.allTrips.length + 1,
-    userID: traveler.id,
-    destinationID: parseInt(destinationSelect.value),
-    travelers: tripSelectTravelers.value,
-    date: formatDate(tripSelectDate.value),
-    duration: tripSelectDuration.value,
-    status: 'pending',
-    suggestedActivities: []
-  };
-  updateDashboard(pendingTripData, tripRequestLocation);
-};
 
 // Fetch API & Initiate Dashboard
 const getFetch = (userID) => {
