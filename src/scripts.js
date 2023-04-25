@@ -38,7 +38,6 @@ const apiCalls = new ApiCalls(),
 
 // Event Listeners
 
-// Modals
 openModalBtn.addEventListener('click', function () {
   modal.style.display = 'block';
 });
@@ -82,14 +81,15 @@ tripForm.addEventListener('submit', function (event) {
 loginForm.addEventListener('submit', function (event) {
   event.preventDefault();
 
+loginDashboardButton.addEventListener('click', function() {
   const username = usernameInput.value;
   const password = passwordInput.value;
 
   if (username.startsWith('traveler')) {
     const userId = parseInt(username.slice(8));
     if (userId >= 1 && userId <= 50 && password === 'travel') {
-      loginPage.classList.add('hidden');
-      dashboardPage.classList.remove('hidden');
+      loginPage.classList.toggle('hidden');
+      dashboardPage.classList.toggle('hidden');
       getFetch(userId);
       loginForm.reset();
       logoutButton.classList.remove('hidden');
@@ -98,7 +98,6 @@ loginForm.addEventListener('submit', function (event) {
     }
   }
 });
-
 
 // Functions
 // Dom updates
