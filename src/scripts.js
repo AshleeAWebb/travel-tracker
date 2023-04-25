@@ -14,37 +14,37 @@ import Trip from '../src/Trip';
 
 // Query Selectors
 const openModalBtn = document.getElementById('open-modal-btn'),
-      closeModalBtn = document.querySelector('.close'),
-      modal = document.getElementById('modal'),
-      welcome = document.getElementById('welcomeTitle'),
-      tripDisplay = document.getElementById('travelerTrips'),
-      yearlyCostDisplay = document.getElementById('totalSpent'),
-      tripForm = document.getElementById('trip-form'),
-      tripRequestLocation = document.getElementById('pendingTrips'),
-      logoutButton = document.getElementById("logoutButton"),
-      loginPage = document.getElementById("loginPage"),
-      dashboardPage = document.getElementById("dashboardPage"),
-      loginDashboardButton = document.getElementById("submitHomePageButton"),
-      loginForm = document.getElementById('login-form'),
-      usernameInput = document.getElementById('username'),
-      passwordInput = document.getElementById('password');
+  closeModalBtn = document.querySelector('.close'),
+  modal = document.getElementById('modal'),
+  welcome = document.getElementById('welcomeTitle'),
+  tripDisplay = document.getElementById('travelerTrips'),
+  yearlyCostDisplay = document.getElementById('totalSpent'),
+  tripForm = document.getElementById('trip-form'),
+  tripRequestLocation = document.getElementById('pendingTrips'),
+  logoutButton = document.getElementById("logoutButton"),
+  loginPage = document.getElementById("loginPage"),
+  dashboardPage = document.getElementById("dashboardPage"),
+  loginDashboardButton = document.getElementById("submitHomePageButton"),
+  loginForm = document.getElementById('login-form'),
+  usernameInput = document.getElementById('username'),
+  passwordInput = document.getElementById('password');
 
 
 // Global Variables
 let traveler;
 const apiCalls = new ApiCalls(),
-      dataHandler = new DataHandler(),
-      pendingTripData = {};
+  dataHandler = new DataHandler();
 
 
 // Event Listeners
+
+// Modals
 openModalBtn.addEventListener('click', function () {
   modal.style.display = 'block';
 });
 
-
 closeModalBtn.addEventListener('click', function () {
-  modal.style.display = 'none'; 
+  modal.style.display = 'none';
 });
 
 modal.addEventListener('click', function (event) {
@@ -53,26 +53,16 @@ modal.addEventListener('click', function (event) {
   }
 });
 
-tripForm.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  handleTripSelection(event);
-
-  modal.style.display = 'none'; 
-  tripForm.reset(); 
-});
-
-logoutButton.addEventListener("click", function() {
+// Hidden Elements
+logoutButton.addEventListener("click", function () {
   loginPage.classList.toggle("hidden");
   if (logoutButton.classList.contains('dashboard-only')) {
-    logoutButton.classList.toggle("hidden")
+    logoutButton.classList.toggle("hidden");
   }
   dashboardPage.classList.add("hidden");
-  loginDashboardButton.classList.remove("hidden");
 });
 
-loginDashboardButton.addEventListener("click", function() {
-  loginDashboardButton.classList.toggle("hidden");
+loginDashboardButton.addEventListener("click", function () {
   logoutButton.classList.toggle("hidden");
   if (dashboardPage.classList.contains('hidden') || !logoutButton.classList.contains('dashboard-only')) {
     logoutButton.classList.add('hidden');
@@ -81,9 +71,15 @@ loginDashboardButton.addEventListener("click", function() {
   }
 });
 
+// Forms
+tripForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+  handleTripSelection(event);
+  modal.style.display = 'none';
+  tripForm.reset();
+});
 
-
-loginForm.addEventListener('submit', function(event) {
+loginForm.addEventListener('submit', function (event) {
   event.preventDefault();
 
   const username = usernameInput.value;
@@ -95,8 +91,7 @@ loginForm.addEventListener('submit', function(event) {
       loginPage.classList.add('hidden');
       dashboardPage.classList.remove('hidden');
       getFetch(userId);
-      loginForm.reset(); 
-      loginDashboardButton.classList.add('hidden');
+      loginForm.reset();
       logoutButton.classList.remove('hidden');
     } else {
       alert('Invalid username or password. Please try again.');
@@ -104,13 +99,9 @@ loginForm.addEventListener('submit', function(event) {
   }
 });
 
-  
-// Functions
-const displayUserInfo = (user) => {
-  welcome.innerHTML = `<h4>Hello, ${user.name}! Get ready to chase the sunset with Horizon's Edge.</h4>`;
-  yearlyCostDisplay.innerText = `Spent this year $${user.getYearlySpent()}`;
-};
 
+// Functions
+// Dom updates
 const populateDestinationsDropdown = (destinations) => {
   const destinationSelect = document.getElementById('destination');
   destinations.sort((a, b) => a.destination.localeCompare(b.destination));
@@ -122,13 +113,23 @@ const populateDestinationsDropdown = (destinations) => {
   });
 };
 
+const formatDate = (date) => {
+  const formattedDate = date.replaceAll('-', '/');
+  return formattedDate;
+};
+
+const displayUserInfo = (user) => {
+  welcome.innerHTML = `<h4>Hello, ${user.name}! Get ready to chase the sunset with Horizon's Edge.</h4>`;
+  yearlyCostDisplay.innerText = `Spent this year $${user.getYearlySpent()}`;
+};
+
 const displayTravelCards = () => {
   const travelerTrips = traveler.getTravelerTrips();
   tripDisplay.innerHTML = '';
   if (travelerTrips.length === 0) {
     tripDisplay.innerHTML = '<h3>No trips found</h3>';
   } else {
-    travelerTrips.forEach(data =>  {
+    travelerTrips.forEach(data => {
       const tripDate = new Date(data.date);
       const formattedDate = tripDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       tripDisplay.innerHTML +=
@@ -141,56 +142,10 @@ const displayTravelCards = () => {
           <div>${formattedDate}</div>
           <div>${data.timeFrame}</div>
           <div>${data.status}</div>
-        </div>`
+        </div>`;
     });
   }
 };
-
-const formatDate = (date) => {
-  const formattedDate = date.replaceAll('-', '/');
-  return formattedDate;
-};
-
-const handleTripSelection = (event) => {
-  event.preventDefault();
-
-  const destinationSelect = document.getElementById('destination');
-  const tripSelectTravelers = document.getElementById('travelers');
-  const tripSelectDate = document.getElementById('date');
-  const tripSelectDuration = document.getElementById('duration');
-
-  if (tripSelectDuration.value < 1) {
-    alert('Please enter a valid trip duration');
-    return;
-  }
-
-  if (tripSelectTravelers.value < 1) {
-    alert('Please enter a valid number of travelers');
-    return;
-  }
-
-  const today = new Date();
-  const selectedDate = new Date(tripSelectDate.value);
-
-  if (selectedDate < today) {
-    alert('Please select a future date');
-    return;
-  }
-
-  const pendingTripData = {
-    id: dataHandler.allTrips.length + 1,
-    userID: traveler.id,
-    destinationID: parseInt(destinationSelect.value),
-    travelers: tripSelectTravelers.value,
-    date: formatDate(tripSelectDate.value),
-    duration: tripSelectDuration.value,
-    status: 'pending', 
-    suggestedActivities: []
-  };
-
-  updateDashboard(pendingTripData, tripRequestLocation);
-};
-
 
 const updateDashboard = (tripData, tripRequestLocation) => {
   const trip = new Trip(tripData, dataHandler);
@@ -212,7 +167,6 @@ const updateDashboard = (tripData, tripRequestLocation) => {
     </div>
   `;
   tripRequestLocation.appendChild(tripCard);
-
   const confirmButton = tripCard.querySelector('.confirm-button');
   const declineButton = tripCard.querySelector('.decline-button');
   confirmButton.addEventListener('click', () => {
@@ -222,8 +176,6 @@ const updateDashboard = (tripData, tripRequestLocation) => {
         tripData.id = dataHandler.allTrips.length + 1;
         trip.status = 'pending';
         tripCard.querySelector('.trip-details').innerHTML += '<div>pending</div>';
-        
-  
         yearlyCostDisplay.innerText = `Spent this year $${traveler.getYearlySpent()}`;
         tripCard.querySelector('.action-buttons').remove();
         tripCard.querySelector('.trip-details div:nth-child(2)').innerHTML = `$${trip.calculateTripCost()}`;
@@ -237,6 +189,41 @@ const updateDashboard = (tripData, tripRequestLocation) => {
   });
 };
 
+// POST and update Dashboard
+const handleTripSelection = (event) => {
+  event.preventDefault();
+  const destinationSelect = document.getElementById('destination');
+  const tripSelectTravelers = document.getElementById('travelers');
+  const tripSelectDate = document.getElementById('date');
+  const tripSelectDuration = document.getElementById('duration');
+  if (tripSelectDuration.value < 1) {
+    alert('Please enter a valid trip duration');
+    return;
+  }
+  if (tripSelectTravelers.value < 1) {
+    alert('Please enter a valid number of travelers');
+    return;
+  }
+  const today = new Date();
+  const selectedDate = new Date(tripSelectDate.value);
+  if (selectedDate < today) {
+    alert('Please select a future date');
+    return;
+  }
+  const pendingTripData = {
+    id: dataHandler.allTrips.length + 1,
+    userID: traveler.id,
+    destinationID: parseInt(destinationSelect.value),
+    travelers: tripSelectTravelers.value,
+    date: formatDate(tripSelectDate.value),
+    duration: tripSelectDuration.value,
+    status: 'pending',
+    suggestedActivities: []
+  };
+  updateDashboard(pendingTripData, tripRequestLocation);
+};
+
+// Fetch API & Initiate Dashboard
 const getFetch = (userID) => {
   apiCalls.fetchAllData('trips')
     .then(tripsData => {
@@ -255,11 +242,9 @@ const getFetch = (userID) => {
     .then(() => {
       displayUserInfo(traveler);
       displayTravelCards();
-
       const totalSpent = traveler.getYearlySpent();
       const amountSpent = totalSpent / 1.1;
       const commission = totalSpent - amountSpent;
-
       generateDonutChart(traveler);
     })
     .catch(error => {
