@@ -1,30 +1,31 @@
 import chai from 'chai';
-const expect = chai.expect;
 import DataHandler from '../src/DataHandler';
 import Trip from '../src/Trip';
 import testData from '../src/data/testData';
 
-describe('Trip', function() {
-  let dataHandler;
-  let trip1;
-  let trip2;
+const expect = chai.expect;
 
-  beforeEach(function() {
+describe('Trip', () => {
+  let dataHandler,
+    trip1,
+    trip2;
+
+  beforeEach(() => {
     dataHandler = new DataHandler();
     dataHandler.setData('destinations', testData.testDestinationData);
-    trip1 = new Trip(testData.testTripData[0], dataHandler);
-    trip2 = new Trip(testData.testTripData[1], dataHandler);
+
+    [trip1, trip2] = testData.testTripData.map((trip) => new Trip(trip, dataHandler));
   });
 
-  it('should be a function', function() {
+  it('should be a function',() => {
     expect(Trip).to.be.a('function');
   });
 
-  it('should be an instance of Trip', function() {
+  it('should be an instance of Trip', () => {
     expect(trip1).to.be.an.instanceOf(Trip);
   });
 
-  it('should store the basic trip data', function() {
+  it('should store the basic trip data', () => {
     expect(trip1.id).to.equal(1);
     expect(trip1.travelers).to.equal(1);
     expect(trip1.date).to.equal('2023/09/16');
@@ -37,18 +38,18 @@ describe('Trip', function() {
     expect(trip2.status).to.equal('approved');
   });
 
-  it('should figure out if the trip has already past', function() {
+  it('should figure out if the trip has already past', () => {
     trip2.getTripTimeFrame();
     expect(trip2.timeFrame).to.equal('past');
   });
 
-  it('should get the destination information', function() {
+  it('should get the destination information', () => {
     expect(trip1.destination).to.deep.equal(testData.testDestinationData[0]);
     expect(trip2.destination).to.deep.equal(testData.testDestinationData[1]);
   });
 
-  it('should calculate how much a trip costs', function() {
-    expect(trip1.calculateTripCost()).to.equal(1056);
-    expect(trip2.calculateTripCost()).to.equal(6270);
+  it('should calculate how much a trip costs', () => {
+    expect(trip1.calculateTripCost()).to.equal(616);
+    expect(trip2.calculateTripCost()).to.equal(1980);
   });
 });

@@ -1,7 +1,7 @@
+/* General CSS Elements */
 * {
   margin: 0;
   padding: 0;
-  /* border: #6148b0 1px solid; */
 }
 
 body {
@@ -10,12 +10,12 @@ body {
   font-family: 'Lato', sans-serif;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 header {
+  width: 100%;
   font-family: 'Original Surfer', cursive;
-  min-width: 1346px;
-  min-height: 98.83px;
   background: rgba(244, 220, 204, 0.8);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -25,17 +25,23 @@ header {
   z-index: 1;
 }
 
-h1 {
+h1,
+h2 {
   margin: 10px;
 }
 
-h2{
-  margin: 10px;
+h2 {
   display: flex;
   justify-content: center;
 }
 
-button {
+p {
+  text-align: center;
+}
+
+/* buttons & input fields*/
+button,
+.submit {
   font-family: 'Original Surfer', cursive;
   border-radius: 50px;
   background: rgba(244, 220, 204, 0.5);
@@ -48,18 +54,62 @@ button {
 }
 
 button:hover,
-.travel-dropdown:hover {
+.submit:hover {
   background-color: #544948;
   color: white;
 }
 
-.book-trip {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+.close-btn {
+  margin: 10px;
+  color: black;
+  float: right;
+  font-size: 36px;
+  font-weight: bold;
 }
 
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.confirm-button,
+.decline-button {
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.input-box {
+  padding: 2%;
+  width: 500px;
+  justify-content: space-between;
+}
+
+input {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Lato', sans-serif;
+  border-radius: 50px;
+}
+
+input:focus {
+  outline: none;
+  border-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Login Page */
 .login-page {
   position: relative;
   width: 100vw;
@@ -102,22 +152,37 @@ button:hover,
   z-index: 0;
 }
 
+/* Dashboard Page */
 .dashboard-page {
-  background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70% ,#b9799c 90%);
+  background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70%, #b9799c 90%);
 }
 
 .dashboard-container {
   height: 100%;
 }
 
+.book-trip {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
 .modal {
   display: none;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   z-index: 1;
-  width: 75%;
-  height: 50%;
-  max-width: fit-content;
-  overflow: auto;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal.show {
+  display: flex;
 }
 
 .modal-content {
@@ -130,53 +195,6 @@ button:hover,
   width: 80%;
   border-radius: 30px;
   text-align: center;
-}
-
-.input-box {
-  padding: 2%;
-  width: 500px;
-  justify-content: space-between;
-}
-
-input {
-  font-size: 16px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-family: 'Lato', sans-serif;
-  border-radius: 50px;
-}
-
-input:focus {
-  outline: none;
-  border-color: rgba(0, 0, 0, 0.25);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.close-btn {
-  margin: 10px;
-  color: black;
-  float: right;
-  font-size: 36px;
-  font-weight: bold;
-}
-
-p {
-  text-align: center;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
 }
 
 .traveler-trip {
@@ -228,7 +246,7 @@ p {
   background: rgba(244, 220, 204, 0.8);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
-  max-width: calc(100% - 20px); 
+  max-width: calc(100% - 20px);
 }
 
 .chart-container {
@@ -237,35 +255,116 @@ p {
   position: relative;
   margin: 5px;
 }
-.confirm-button,
-.decline-button {
-  font-family: 'Lato', sans-serif;
-  font-size: 20px;
-  padding: 5px;
-}
 
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
+/* Media Queries */
+
+/* CSS for smaller screens */
+@media only screen and (max-width: 767px) {
+  header {
+    max-height: 50px !important;
+    padding: 10px !important;
+  }
+
+  .login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70%, #b9799c 90%);
+    background-image: none;
+    background-color: #b9799c; /* add background color here */
+  }
+
+  .login-form {
+    width: 100%;
+    max-width: 350px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .dashboard-page {
+    background: linear-gradient(to bottom, #ffffff 30%, #b9799c 70%, #d68c7a 90%);
+  }
+
+  .traveler-trip,
+  .pending-trip {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  .card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .finance-card {
+    max-width: 100%;
+    margin: 20px;
+  }
+
+  .chart-container {
+    max-width: 100%;
+    height: 250px;
   }
 }
 
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
+/* CSS for larger screens */
+@media only screen and (min-width: 768px) {
+  header {
+    max-height: 98.83px !important;
+    padding: 20px !important;
+  }
+
+  .login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70%, #b9799c 90%);
+    background-image: none;
+    background-size: cover;
+  }
+
+  .login-form {
+    width: 500px;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .dashboard-page {
+    background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70%, #b9799c 90%);
+  }
+
+  .traveler-trip,
+  .pending-trip {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+  }
+
+  .card {
+    max-width: 200px;
+    margin: 0;
+  }
+
+  .finance-card {
+    max-width: calc(50% - 20px);
+    margin: 20px;
+  }
+
+  .chart-container {
+    max-width: 50%;
+    height: 350px;
   }
 }
 
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
-}
-
+/* CSS Class for Hidden Elements*/
 .hidden {
   display: none;
 }
-
-

@@ -11,35 +11,28 @@ export default class Trip {
   }
 
   convertDates() {
-    const date = new Date();
-    return {
-      currentDate: date.setHours(0, 0, 0, 0),
-      tripDate: new Date(this.date).setHours(0, 0, 0, 0)
-    }
+    const currentDate = new Date().setHours(0, 0, 0, 0);
+    const tripDate = new Date(this.date).setHours(0, 0, 0, 0);
+    return { currentDate, tripDate };
   }
 
   getTripTimeFrame() {
     const convertedDates = this.convertDates();
-    if (convertedDates.tripDate === convertedDates.currentDate) {
-      return 'current';
-    }
-    if (convertedDates.tripDate <= convertedDates.currentDate) {
-      return 'past';
-    } else {
-      return 'upcoming';
-    }
+    return convertedDates.tripDate === convertedDates.currentDate 
+      ? 'current' 
+      : (convertedDates.tripDate <= convertedDates.currentDate ? 'past' : 'upcoming');
   }
 
   getDestinationInfo(destinationID) {
     return this.dataManager.getDataByID('destinations', 'id', destinationID)[0];
-  }
+  };
 
   calculateTripCost() {
     const totalBeforeFee = 
-    (this.destination.estimatedLodgingCostPerDay * this.duration) 
+    (this.destination.estimatedLodgingCostPerDay * this.duration); 
     + 
     (this.destination.estimatedFlightCostPerPerson * this.travelers);
     const travelAgentFee = totalBeforeFee * 0.1;
     return totalBeforeFee + travelAgentFee;
-  }
-}
+  };
+};

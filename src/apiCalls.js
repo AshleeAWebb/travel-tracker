@@ -1,19 +1,18 @@
 export default class ApiCalls {
-  constructor() {
-  };
+  baseURL = 'http://localhost:3001/api/v1/';
 
   fetchAllData(url) {
-    return fetch(`http://localhost:3001/api/v1/${url}`)
+    return fetch(`${this.baseURL}${url}`)
       .then(res => res.json());
-  };
+  }
 
   fetchSingleTraveler(url, id) {
-    return fetch(`http://localhost:3001/api/v1/${url}/${id}`)
+    return fetch(`${this.baseURL}${url}/${id}`)
       .then(res => res.json());
-  };
+  }
 
   postTripsData(url, data) {
-    return fetch(`http://localhost:3001/api/v1/${url}`, {
+    return fetch(`${this.baseURL}${url}`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -26,7 +25,6 @@ export default class ApiCalls {
         }
         return res.json();
       })
-      .then(data => console.log(data))
       .catch(error => console.log(error));
-  };
-};
+  }
+}
