@@ -236,6 +236,7 @@ input:focus {
 
 .chart-container {
   max-width: 90%;
+  max-height: 250px;
   height: 350px;
   position: relative;
   margin: 5px;
