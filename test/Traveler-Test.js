@@ -6,17 +6,17 @@ import Trip from '../src/Trip';
 
 const expect = chai.expect;
 
-describe('Traveler', function() {
+describe('Traveler', () => {
   let dataHandler,
-      traveler1,
-      traveler2,
-      trip1,
-      trip2,
-      trip3, 
-      trip4,
-      trip5;
+    traveler1,
+    traveler2,
+    trip1,
+    trip2,
+    trip3,
+    trip4,
+    trip5;
 
-  beforeEach(function() {
+  beforeEach(() => {
     dataHandler = new DataHandler();
     dataHandler.setData('allTrips', testData.testTripData);
     dataHandler.setData('destinations', testData.testDestinationData);
