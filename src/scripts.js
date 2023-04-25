@@ -54,6 +54,7 @@ modal.addEventListener('click', function (event) {
 
 // Hidden Elements
 logoutButton.addEventListener("click", function () {
+  location.reload(); 
   loginPage.classList.toggle("hidden");
   if (logoutButton.classList.contains('dashboard-only')) {
     logoutButton.classList.toggle("hidden");
