@@ -7,32 +7,35 @@ export default class Traveler {
     this.name = travelerData.name;
     this.type = travelerData.travelerType;
     this.trips = null;
-  }
+  };
 
   getTravelerTrips() {
-    const trips = this.dataHandler.getDataByID('allTrips', 'userID', this.id) || [];
-    this.trips = trips.map(trip => new Trip(trip, this.dataHandler));
+    if (!this.trips) {
+      const trips = this.dataHandler.getDataByID('allTrips', 'userID', this.id) || [];
+      this.trips = trips.map(trip => new Trip(trip, this.dataHandler));
+    };
     return this.trips;
-  }
+  };
 
   filterTrips(tripProperty, filterCriteria) {
     return this.trips.filter(trip => trip[tripProperty] === filterCriteria);
-  }
+  };
 
   getYearlySpent() {
-    const tripsByDate = this.trips.slice().sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateB - dateA;
-    });
-    const mostRecentYear = new Date(tripsByDate[0].date).getFullYear();
-    const totalCost = tripsByDate.reduce((total, trip) => {
-      const tripYear = new Date(trip.date).getFullYear();
-      if (tripYear === mostRecentYear) {
-        return total + trip.calculateTripCost();
-      }
-      return total;
+    const tripsByYear = this.getTravelerTrips().reduce((acc, trip) => {
+      const year = new Date(trip.date).getFullYear();
+      if (!acc[year]) {
+        acc[year] = [];
+      };
+      acc[year].push(trip);
+      return acc;
+    }, {});
+    const keys = Object.keys(tripsByYear);
+    const mostRecentYear = keys.reduce((maxYear, year) => {
+      return Math.max(maxYear, parseInt(year));
     }, 0);
+    const tripsThisYear = tripsByYear[mostRecentYear] || [];
+    const totalCost = tripsThisYear.reduce((total, trip) => total + trip.calculateTripCost(), 0);
     const commission = totalCost * 0.1;
     const displayTotal = (commission + totalCost).toFixed(2);
     return displayTotal;
