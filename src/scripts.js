@@ -80,6 +80,7 @@ tripForm.addEventListener('submit', function (event) {
 
 loginForm.addEventListener('submit', function (event) {
   event.preventDefault();
+});
 
 loginDashboardButton.addEventListener('click', function() {
   const username = usernameInput.value;
