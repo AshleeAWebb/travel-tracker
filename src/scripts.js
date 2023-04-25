@@ -28,7 +28,7 @@ const openModalBtn = document.getElementById('open-modal-btn'),
       loginForm = document.getElementById('login-form'),
       usernameInput = document.getElementById('username'),
       passwordInput = document.getElementById('password');
-      
+
 
 // Global Variables
 let traveler;
@@ -38,16 +38,13 @@ const apiCalls = new ApiCalls(),
 
 
 // Event Listeners
-window.addEventListener('load', () => {
-  getFetch(userID)
-});
-
 openModalBtn.addEventListener('click', function () {
   modal.style.display = 'block';
 });
 
+
 closeModalBtn.addEventListener('click', function () {
-  modal.style.display = 'none';
+  modal.style.display = 'none'; 
 });
 
 modal.addEventListener('click', function (event) {
@@ -67,14 +64,24 @@ tripForm.addEventListener('submit', function(event) {
 
 logoutButton.addEventListener("click", function() {
   loginPage.classList.toggle("hidden");
-  logoutButton.classList.toggle("hidden")
+  if (logoutButton.classList.contains('dashboard-only')) {
+    logoutButton.classList.toggle("hidden")
+  }
+  dashboardPage.classList.add("hidden");
+  loginDashboardButton.classList.remove("hidden");
 });
 
 loginDashboardButton.addEventListener("click", function() {
   loginDashboardButton.classList.toggle("hidden");
-  logoutButton.classList.toggle("hidden")
-  loginDashboardButton.classList.toggle("hidden");
+  logoutButton.classList.toggle("hidden");
+  if (dashboardPage.classList.contains('hidden') || !logoutButton.classList.contains('dashboard-only')) {
+    logoutButton.classList.add('hidden');
+  } else {
+    logoutButton.classList.remove('hidden');
+  }
 });
+
+
 
 loginForm.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -89,8 +96,8 @@ loginForm.addEventListener('submit', function(event) {
       dashboardPage.classList.remove('hidden');
       getFetch(userId);
       loginForm.reset(); 
-      loginDashboardPage.classList.remove('hidden');
-      logoutButton.classList.add('hidden');
+      loginDashboardButton.classList.add('hidden');
+      logoutButton.classList.remove('hidden');
     } else {
       alert('Invalid username or password. Please try again.');
     }
