@@ -10,12 +10,12 @@ body {
   font-family: 'Lato', sans-serif;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 header {
+  width: 100%;
   font-family: 'Original Surfer', cursive;
-  min-width: 1346px;
-  min-height: 98.83px;
   background: rgba(244, 220, 204, 0.8);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -30,7 +30,7 @@ h2 {
   margin: 10px;
 }
 
-h2{
+h2 {
   display: flex;
   justify-content: center;
 }
@@ -154,7 +154,7 @@ input:focus {
 
 /* Dashboard Page */
 .dashboard-page {
-  background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70% ,#b9799c 90%);
+  background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70%, #b9799c 90%);
 }
 
 .dashboard-container {
@@ -246,7 +246,7 @@ input:focus {
   background: rgba(244, 220, 204, 0.8);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
-  max-width: calc(100% - 20px); 
+  max-width: calc(100% - 20px);
 }
 
 .chart-container {
@@ -256,14 +256,75 @@ input:focus {
   margin: 5px;
 }
 
-/* Media Queries*/
-@media only screen and (min-width: 768px) {
+/* Media Queries */
+
+/* CSS for smaller screens */
+@media only screen and (max-width: 767px) {
+  header {
+    max-height: 50px !important;
+    padding: 10px !important;
+  }
+
   .login-page {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70% ,#b9799c 90%);
+    background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70%, #b9799c 90%);
+    background-image: none;
+    background-color: #b9799c; /* add background color here */
+  }
+
+  .login-form {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .dashboard-page {
+    background: linear-gradient(to bottom, #ffffff 30%, #b9799c 70%, #d68c7a 90%);
+  }
+
+  .traveler-trip,
+  .pending-trip {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  .card {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .finance-card {
+    max-width: 100%;
+    margin: 20px;
+  }
+
+  .chart-container {
+    max-width: 100%;
+    height: 250px;
+  }
+}
+
+/* CSS for larger screens */
+@media only screen and (min-width: 768px) {
+  header {
+    max-height: 98.83px !important;
+    padding: 20px !important;
+  }
+
+  .login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70%, #b9799c 90%);
     background-image: none;
     background-size: cover;
   }
@@ -274,11 +335,36 @@ input:focus {
     border-radius: 30px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
   }
+
+  .dashboard-page {
+    background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70%, #b9799c 90%);
+  }
+
+  .traveler-trip,
+  .pending-trip {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+  }
+
+  .card {
+    max-width: 200px;
+    margin: 0;
+  }
+
+  .finance-card {
+    max-width: calc(50% - 20px);
+    margin: 20px;
+  }
+
+  .chart-container {
+    max-width: 50%;
+    height: 350px;
+  }
 }
 
 /* CSS Class for Hidden Elements*/
 .hidden {
   display: none;
 }
-
-
