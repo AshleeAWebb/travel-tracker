@@ -1,3 +1,4 @@
+/* General CSS Elements */
 * {
   margin: 0;
   padding: 0;
@@ -34,6 +35,11 @@ h2{
   justify-content: center;
 }
 
+p {
+  text-align: center;
+}
+
+/* buttons & input fields*/
 button,
 .submit {
   font-family: 'Original Surfer', cursive;
@@ -53,13 +59,57 @@ button:hover,
   color: white;
 }
 
-.book-trip {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+.close-btn {
+  margin: 10px;
+  color: black;
+  float: right;
+  font-size: 36px;
+  font-weight: bold;
 }
 
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.confirm-button,
+.decline-button {
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.input-box {
+  padding: 2%;
+  width: 500px;
+  justify-content: space-between;
+}
+
+input {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Lato', sans-serif;
+  border-radius: 50px;
+}
+
+input:focus {
+  outline: none;
+  border-color: rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Login Page */
 .login-page {
   position: relative;
   width: 100vw;
@@ -102,12 +152,20 @@ button:hover,
   z-index: 0;
 }
 
+/* Dashboard Page */
 .dashboard-page {
   background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70% ,#b9799c 90%);
 }
 
 .dashboard-container {
   height: 100%;
+}
+
+.book-trip {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .modal {
@@ -139,53 +197,6 @@ button:hover,
   text-align: center;
 }
 
-.input-box {
-  padding: 2%;
-  width: 500px;
-  justify-content: space-between;
-}
-
-input {
-  font-size: 16px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-family: 'Lato', sans-serif;
-  border-radius: 50px;
-}
-
-input:focus {
-  outline: none;
-  border-color: rgba(0, 0, 0, 0.25);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.close-btn {
-  margin: 10px;
-  color: black;
-  float: right;
-  font-size: 36px;
-  font-weight: bold;
-}
-
-p {
-  text-align: center;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 .traveler-trip {
   font-family: 'Lato', sans-serif;
   display: flex;
@@ -215,6 +226,13 @@ p {
   border-radius: 30px;
 }
 
+.travel-history {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .finance-card-container {
   display: flex;
   justify-content: center;
@@ -237,33 +255,28 @@ p {
   position: relative;
   margin: 5px;
 }
-.confirm-button,
-.decline-button {
-  font-family: 'Lato', sans-serif;
-  font-size: 20px;
-  padding: 5px;
-}
 
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 15px;
+/* Media Queries*/
+@media only screen and (min-width: 768px) {
+  .login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #ffffff 30%, #d68c7a 70% ,#b9799c 90%);
+    background-image: none;
+    background-size: cover;
+  }
+
+  .login-form {
+    width: 500px;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
   }
 }
 
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
-}
-
+/* CSS Class for Hidden Elements*/
 .hidden {
   display: none;
 }
