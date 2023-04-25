@@ -37,7 +37,6 @@ const apiCalls = new ApiCalls(),
 
 
 // Event Listeners
-
 openModalBtn.addEventListener('click', function () {
   modal.style.display = 'block';
 });
