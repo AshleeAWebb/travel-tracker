@@ -38,10 +38,6 @@ const apiCalls = new ApiCalls(),
 
 
 // Event Listeners
-window.addEventListener('load', () => {
-  getFetch(userID)
-});
-
 openModalBtn.addEventListener('click', function () {
   modal.style.display = 'block';
 });
@@ -76,29 +72,36 @@ loginDashboardButton.addEventListener("click", function() {
   loginDashboardButton.classList.toggle("hidden");
 });
 
-loginForm.addEventListener('submit', function(event) {
-  event.preventDefault();
+// Functions
 
+const toggleLogoutButton = (visible) => {
+  logoutButton.classList.toggle('hidden', !visible);
+};
+
+logoutButton.addEventListener('click', function() {
+  loginPage.classList.toggle('hidden');
+  dashboardPage.classList.toggle('hidden');
+  toggleLogoutButton(false);
+});
+
+loginDashboardButton.addEventListener('click', function() {
   const username = usernameInput.value;
   const password = passwordInput.value;
 
   if (username.startsWith('traveler')) {
     const userId = parseInt(username.slice(8));
     if (userId >= 1 && userId <= 50 && password === 'travel') {
-      loginPage.classList.add('hidden');
-      dashboardPage.classList.remove('hidden');
+      loginPage.classList.toggle('hidden');
+      dashboardPage.classList.toggle('hidden');
       getFetch(userId);
       loginForm.reset(); 
-      loginDashboardPage.classList.remove('hidden');
-      logoutButton.classList.add('hidden');
+      toggleLogoutButton(true);
     } else {
       alert('Invalid username or password. Please try again.');
     }
   }
 });
 
-  
-// Functions
 const displayUserInfo = (user) => {
   welcome.innerHTML = `<h4>Hello, ${user.name}! Get ready to chase the sunset with Horizon's Edge.</h4>`;
   yearlyCostDisplay.innerText = `Spent this year $${user.getYearlySpent()}`;
