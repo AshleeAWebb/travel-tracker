@@ -60,7 +60,7 @@ tripForm.addEventListener('submit', function(event) {
   
 // Functions
 const displayUserInfo = (user) => {
-  welcome.innerHTML = `<h4>Hello, ${user.name}! Get ready to chase the sunset with Horizon's Edge.</h4>`;
+  welcome.innerHTML = `<h2>Hello, ${user.name}! Get ready to chase the sunset with Horizon's Edge.</h2>`;
   yearlyCostDisplay.innerText = `Spent this year $${user.getYearlySpent()}`;
 };
 

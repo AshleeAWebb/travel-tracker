@@ -170,6 +170,13 @@ p {
   border-radius: 30px;
 }
 
+.travel-history {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .finance-card-container {
   display: flex;
   justify-content: center;
